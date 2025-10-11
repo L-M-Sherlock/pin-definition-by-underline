@@ -33,19 +33,30 @@ function pinByUnderline() {
                 blockStartElement = current;
                 break;
             } else if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
-                // 找到有.num的def1，需要判断它与target的关系
-                // 检查这个def1前面是否紧邻def0
-                let prevOfCurrent = current.previousElementSibling;
-                // 跳过没有.num的说明文字
-                while (prevOfCurrent && prevOfCurrent.matches('div[data-sc-class="def1"]') && !prevOfCurrent.querySelector('span[data-sc-class="num"]')) {
-                    prevOfCurrent = prevOfCurrent.previousElementSibling;
+                // 找到有.num的def1，需要判断它是否"属于某个def0块"
+                // 方法：从这个def1开始向前追溯，跳过所有def1（有无.num都跳过），看最终是否能找到def0
+                let ancestorCheck = current.previousElementSibling;
+                let foundAncestorDef0 = false;
+                
+                while (ancestorCheck) {
+                    if (ancestorCheck.matches('div[data-sc-class="def0"]')) {
+                        // 找到了前置def0，说明current属于某个def0块
+                        foundAncestorDef0 = true;
+                        break;
+                    } else if (ancestorCheck.matches('div[data-sc-class="def1"]')) {
+                        // 遇到def1（无论有无.num），继续向前追溯
+                        ancestorCheck = ancestorCheck.previousElementSibling;
+                    } else {
+                        // 遇到其他类型的元素，停止追溯
+                        break;
+                    }
                 }
                 
-                if (prevOfCurrent && prevOfCurrent.matches('div[data-sc-class="def0"]')) {
-                    // 这个有.num的def1前面是def0，说明target也属于这个def0块
-                    // 继续向前查找def0（不做任何操作，让循环继续）
+                if (foundAncestorDef0) {
+                    // current属于某个def0块，target也可能属于这个块，继续向前查找
+                    // 不做任何操作，让循环继续
                 } else {
-                    // 这个有.num的def1前面不是def0，说明target与它平级独立
+                    // current不属于任何def0块，它是独立的块起点，target与它平级
                     break;
                 }
             }
