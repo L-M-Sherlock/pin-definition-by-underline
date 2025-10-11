@@ -34,10 +34,22 @@ function pinByUnderline() {
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
     const fullBlockElements = [blockStartElement];
     let nextInBlock = blockStartElement.nextElementSibling;
+    
+    // 判断块结束的条件取决于块起点的类型
+    const isBlockStartedByDef0 = blockStartElement.matches('div[data-sc-class="def0"]');
+    
     while (nextInBlock) {
         // 遇到下一个块的起点时，当前块结束
-        if (nextInBlock.matches('div[data-sc-class="def0"]') || (nextInBlock.matches('div[data-sc-class="def1"]') && nextInBlock.querySelector('span[data-sc-class="num"]'))) {
-            break;
+        if (isBlockStartedByDef0) {
+            // 如果当前块由def0开始，只有遇到下一个def0时才结束
+            if (nextInBlock.matches('div[data-sc-class="def0"]')) {
+                break;
+            }
+        } else {
+            // 如果当前块由带.num的def1开始（无def0），遇到下一个带.num的def1时结束
+            if (nextInBlock.matches('div[data-sc-class="def1"]') && nextInBlock.querySelector('span[data-sc-class="num"]')) {
+                break;
+            }
         }
         fullBlockElements.push(nextInBlock);
         nextInBlock = nextInBlock.nextElementSibling;
