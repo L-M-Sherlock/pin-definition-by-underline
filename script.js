@@ -17,17 +17,18 @@ function pinByUnderline() {
     // --- 2. 块发现：只识别真正的、可移动的释义块 ---
 
     // 2a. 找到块的真正起始点。一个块必须由 def0 或带 .num 的 def1 开始。
+    // 始终向前查找最近的块起点（def0 优先级最高）
     let blockStartElement = targetDef;
-    // 如果目标自己不是块的起点，则向前查找
-    if (!targetDef.matches('div[data-sc-class="def0"]') && !targetDef.querySelector('span[data-sc-class="num"]')) {
-        let current = targetDef.previousElementSibling;
-        while (current) {
-            if (current.matches('div[data-sc-class="def0"]') || (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]'))) {
-                blockStartElement = current;
+    let current = targetDef.previousElementSibling;
+    while (current) {
+        if (current.matches('div[data-sc-class="def0"]') || (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]'))) {
+            blockStartElement = current;
+            // 如果找到 def0，这是最高优先级的起点，停止查找
+            if (current.matches('div[data-sc-class="def0"]')) {
                 break;
             }
-            current = current.previousElementSibling;
         }
+        current = current.previousElementSibling;
     }
     
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
