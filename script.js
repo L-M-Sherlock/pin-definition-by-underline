@@ -44,18 +44,29 @@ function pinByUnderline() {
     }
     
     // --- 3. 内部重排 ---
-    // 重排顺序：目标优先，然后是块起点，最后是其他元素
+    // 重排顺序取决于blockStartElement的类型
     
     const otherParts = fullBlockElements.filter(el => 
         el !== blockStartElement && el !== targetDef
     );
     
     const nodesToMove = [];
-    if (targetDef !== blockStartElement) {
-        nodesToMove.push(targetDef);  // 目标排在最前
+    
+    if (blockStartElement.matches('div[data-sc-class="def0"]')) {
+        // 如果块起点是def0（块标记），它应该保持在最前
+        nodesToMove.push(blockStartElement);  // 块标记在最前
+        if (targetDef !== blockStartElement) {
+            nodesToMove.push(targetDef);      // 目标紧跟块标记
+        }
+        nodesToMove.push(...otherParts);      // 其他元素排在最后
+    } else {
+        // 如果块起点是带.num的def1，没有块标记
+        if (targetDef !== blockStartElement) {
+            nodesToMove.push(targetDef);      // 目标排在最前
+        }
+        nodesToMove.push(blockStartElement);  // 块起点排在目标后面
+        nodesToMove.push(...otherParts);      // 其他元素排在最后
     }
-    nodesToMove.push(blockStartElement);  // 块起点排在目标后面
-    nodesToMove.push(...otherParts);      // 其他元素排在最后
     
     // --- 4. 执行 DOM 操作 ---
 
@@ -77,10 +88,17 @@ function pinByUnderline() {
     if (insertionPoint) {
         if (insertionPoint === blockStartElement) {
             // 当前块已经是第一个块，只需要块内重排
-            // 将targetDef移到blockStartElement前面
             if (targetDef !== blockStartElement) {
-                blockStartElement.before(targetDef);
-                // otherParts保持原位（在blockStartElement之后）
+                // 区分两种情况：
+                if (blockStartElement.matches('div[data-sc-class="def0"]')) {
+                    // 情况1: blockStartElement是def0（块标记），应保持在最前
+                    // 将目标移到def0之后的第一个位置
+                    blockStartElement.after(targetDef);
+                } else {
+                    // 情况2: blockStartElement是带.num的def1，没有块标记
+                    // 将目标移到blockStartElement前面
+                    blockStartElement.before(targetDef);
+                }
             }
         } else {
             // 需要整块移动到第一个块前面（包含块内重排）
