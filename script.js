@@ -44,16 +44,18 @@ function pinByUnderline() {
     }
     
     // --- 3. 内部重排 ---
-
+    // 重排顺序：目标优先，然后是块起点，最后是其他元素
+    
     const otherParts = fullBlockElements.filter(el => 
         el !== blockStartElement && el !== targetDef
     );
     
-    const nodesToMove = [blockStartElement];
+    const nodesToMove = [];
     if (targetDef !== blockStartElement) {
-        nodesToMove.push(targetDef);
+        nodesToMove.push(targetDef);  // 目标排在最前
     }
-    nodesToMove.push(...otherParts);
+    nodesToMove.push(blockStartElement);  // 块起点排在目标后面
+    nodesToMove.push(...otherParts);      // 其他元素排在最后
     
     // --- 4. 执行 DOM 操作 ---
 
@@ -73,8 +75,17 @@ function pinByUnderline() {
     }
 
     if (insertionPoint) {
-        // 将重排后的块，插入到第一个释义块的前面
-        insertionPoint.before(...nodesToMove);
+        if (insertionPoint === blockStartElement) {
+            // 当前块已经是第一个块，只需要块内重排
+            // 将targetDef移到blockStartElement前面
+            if (targetDef !== blockStartElement) {
+                blockStartElement.before(targetDef);
+                // otherParts保持原位（在blockStartElement之后）
+            }
+        } else {
+            // 需要整块移动到第一个块前面（包含块内重排）
+            insertionPoint.before(...nodesToMove);
+        }
     }
 
     // 4c. 置顶整个词条 li (如果存在)
