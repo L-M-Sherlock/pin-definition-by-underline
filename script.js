@@ -19,16 +19,22 @@ function pinByUnderline() {
     // 2a. 找到块的真正起始点。一个块必须由 def0 或带 .num 的 def1 开始。
     // 始终向前查找最近的块起点（def0 优先级最高）
     let blockStartElement = targetDef;
-    let current = targetDef.previousElementSibling;
-    while (current) {
-        if (current.matches('div[data-sc-class="def0"]') || (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]'))) {
-            blockStartElement = current;
-            // 如果找到 def0，这是最高优先级的起点，停止查找
-            if (current.matches('div[data-sc-class="def0"]')) {
+    
+    // 先检查目标本身是否是块起点
+    const isTargetBlockStart = targetDef.matches('div[data-sc-class="def0"]') || 
+                                (targetDef.matches('div[data-sc-class="def1"]') && targetDef.querySelector('span[data-sc-class="num"]'));
+    
+    if (!isTargetBlockStart) {
+        // 目标不是块起点，向前查找
+        let current = targetDef.previousElementSibling;
+        while (current) {
+            if (current.matches('div[data-sc-class="def0"]') || (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]'))) {
+                blockStartElement = current;
+                // 找到第一个块起点就停止（最近的）
                 break;
             }
+            current = current.previousElementSibling;
         }
-        current = current.previousElementSibling;
     }
     
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
@@ -93,10 +99,11 @@ function pinByUnderline() {
             el !== blockStartElement && el !== targetDef
         );
         
+        // 策略：块起点保持在前，目标紧跟其后（与def0块的无说明文字情况一致）
+        nodesToMove.push(blockStartElement);  // 块起点在最前
         if (targetDef !== blockStartElement) {
-            nodesToMove.push(targetDef);      // 目标排在最前
+            nodesToMove.push(targetDef);      // 目标紧跟块起点
         }
-        nodesToMove.push(blockStartElement);  // 块起点排在目标后面
         nodesToMove.push(...otherParts);      // 其他元素排在最后
     }
     
@@ -152,8 +159,18 @@ function pinByUnderline() {
                     }
                 } else {
                     // 情况2: blockStartElement是带.num的def1，没有块标记
-                    // 将目标移到blockStartElement前面
-                    blockStartElement.before(targetDef);
+                    // 策略：块起点保持在前，目标紧跟其后
+                    if (targetDef !== blockStartElement) {
+                        const otherParts = fullBlockElements.filter(el => 
+                            el !== blockStartElement && el !== targetDef
+                        );
+                        
+                        // 将目标移到块起点之后
+                        blockStartElement.after(targetDef);
+                        if (otherParts.length > 0) {
+                            targetDef.after(...otherParts);
+                        }
+                    }
                 }
             }
         } else {
