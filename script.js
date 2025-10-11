@@ -58,21 +58,29 @@ function pinByUnderline() {
     // --- 3. 内部重排 ---
     // 重排顺序取决于blockStartElement的类型
     
-    const otherParts = fullBlockElements.filter(el => 
-        el !== blockStartElement && el !== targetDef
-    );
-    
     const nodesToMove = [];
     
     if (blockStartElement.matches('div[data-sc-class="def0"]')) {
-        // 如果块起点是def0（块标记），它应该保持在最前
+        // 如果块起点是def0（块标记）
+        // 保持原有顺序，只将目标提前，但保留在说明文字等之后
         nodesToMove.push(blockStartElement);  // 块标记在最前
+        
         if (targetDef !== blockStartElement) {
-            nodesToMove.push(targetDef);      // 目标紧跟块标记
+            // 找出目标之前和之后的元素
+            const targetIndex = fullBlockElements.indexOf(targetDef);
+            const beforeTarget = fullBlockElements.slice(1, targetIndex);  // 目标之前的元素（不含blockStartElement）
+            const afterTarget = fullBlockElements.slice(targetIndex + 1);  // 目标之后的元素
+            
+            nodesToMove.push(...beforeTarget);  // 目标之前的元素（如说明文字）
+            nodesToMove.push(targetDef);        // 目标
+            nodesToMove.push(...afterTarget);   // 目标之后的元素
         }
-        nodesToMove.push(...otherParts);      // 其他元素排在最后
     } else {
         // 如果块起点是带.num的def1，没有块标记
+        const otherParts = fullBlockElements.filter(el => 
+            el !== blockStartElement && el !== targetDef
+        );
+        
         if (targetDef !== blockStartElement) {
             nodesToMove.push(targetDef);      // 目标排在最前
         }
@@ -103,9 +111,9 @@ function pinByUnderline() {
             if (targetDef !== blockStartElement) {
                 // 区分两种情况：
                 if (blockStartElement.matches('div[data-sc-class="def0"]')) {
-                    // 情况1: blockStartElement是def0（块标记），应保持在最前
-                    // 将目标移到def0之后的第一个位置
-                    blockStartElement.after(targetDef);
+                    // 情况1: blockStartElement是def0（块标记）
+                    // 保持原有顺序，不做重排（说明文字等保持在目标之前）
+                    // 元素已经在正确的位置，无需移动
                 } else {
                     // 情况2: blockStartElement是带.num的def1，没有块标记
                     // 将目标移到blockStartElement前面
