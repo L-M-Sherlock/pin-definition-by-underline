@@ -17,30 +17,52 @@ function pinByUnderline() {
     // --- 2. 块发现：只识别真正的、可移动的释义块 ---
 
     // 2a. 找到块的真正起始点。一个块必须由 def0 或带 .num 的 def1 开始。
-    // 策略：def0 优先级最高；找到第一个有.num的def1后，继续查找是否有def0
+    // 关键改进：区分target本身是否有.num，采用不同的查找策略
     let blockStartElement = targetDef;
-    let firstDef1WithNum = null;  // 记录第一个找到的带.num的def1
     let current = targetDef.previousElementSibling;
     
-    while (current) {
-        if (current.matches('div[data-sc-class="def0"]')) {
-            // 找到def0，这是最高优先级，立即使用
-            blockStartElement = current;
-            break;
-        } else if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
-            // 找到带.num的def1
-            if (!firstDef1WithNum) {
-                // 记录第一个（最近的）带.num的def1
-                firstDef1WithNum = current;
-                // 继续查找，看前面是否有def0
-            }
-        }
-        current = current.previousElementSibling;
-    }
+    // 检查target本身是否有.num - 这决定了查找策略
+    const targetHasNum = targetDef.matches('div[data-sc-class="def1"]') && targetDef.querySelector('span[data-sc-class="num"]');
     
-    // 如果没找到def0，但找到了带.num的def1，使用它
-    if (blockStartElement === targetDef && firstDef1WithNum) {
-        blockStartElement = firstDef1WithNum;
+    if (targetHasNum) {
+        // Target本身有.num，它可能是一个独立的块
+        // 向前查找def0，但如果遇到另一个有.num的def1就停止（它们是平级的）
+        while (current) {
+            if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
+                // 遇到另一个有.num的def1 - target与它独立
+                break;
+            } else if (current.matches('div[data-sc-class="def0"]')) {
+                // 在遇到其他编号项之前找到def0，使用它
+                blockStartElement = current;
+                break;
+            }
+            current = current.previousElementSibling;
+        }
+        // 如果没找到def0，blockStartElement保持为targetDef（独立块）
+    } else {
+        // Target本身没有.num，它从属于前面的某个块
+        // 向前查找最近的有.num的def1或def0
+        let firstDef1WithNum = null;
+        
+        while (current) {
+            if (current.matches('div[data-sc-class="def0"]')) {
+                // 找到def0，这是最高优先级
+                blockStartElement = current;
+                break;
+            } else if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
+                // 找到带.num的def1
+                if (!firstDef1WithNum) {
+                    firstDef1WithNum = current;
+                    // 继续查找，看前面是否有def0
+                }
+            }
+            current = current.previousElementSibling;
+        }
+        
+        // 如果没找到def0，但找到了带.num的def1，使用它
+        if (blockStartElement === targetDef && firstDef1WithNum) {
+            blockStartElement = firstDef1WithNum;
+        }
     }
     
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
