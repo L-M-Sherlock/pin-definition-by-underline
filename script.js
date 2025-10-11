@@ -26,15 +26,28 @@ function pinByUnderline() {
     
     if (targetHasNum) {
         // Target本身有.num，它可能是一个独立的块
-        // 向前查找def0，但如果遇到另一个有.num的def1就停止（它们是平级的）
+        // 关键：需要区分"同块内的编号项"和"平级的独立块"
         while (current) {
-            if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
-                // 遇到另一个有.num的def1 - target与它独立
-                break;
-            } else if (current.matches('div[data-sc-class="def0"]')) {
-                // 在遇到其他编号项之前找到def0，使用它
+            if (current.matches('div[data-sc-class="def0"]')) {
+                // 找到def0，使用它
                 blockStartElement = current;
                 break;
+            } else if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
+                // 找到有.num的def1，需要判断它与target的关系
+                // 检查这个def1前面是否紧邻def0
+                let prevOfCurrent = current.previousElementSibling;
+                // 跳过没有.num的说明文字
+                while (prevOfCurrent && prevOfCurrent.matches('div[data-sc-class="def1"]') && !prevOfCurrent.querySelector('span[data-sc-class="num"]')) {
+                    prevOfCurrent = prevOfCurrent.previousElementSibling;
+                }
+                
+                if (prevOfCurrent && prevOfCurrent.matches('div[data-sc-class="def0"]')) {
+                    // 这个有.num的def1前面是def0，说明target也属于这个def0块
+                    // 继续向前查找def0（不做任何操作，让循环继续）
+                } else {
+                    // 这个有.num的def1前面不是def0，说明target与它平级独立
+                    break;
+                }
             }
             current = current.previousElementSibling;
         }
