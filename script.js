@@ -17,24 +17,30 @@ function pinByUnderline() {
     // --- 2. 块发现：只识别真正的、可移动的释义块 ---
 
     // 2a. 找到块的真正起始点。一个块必须由 def0 或带 .num 的 def1 开始。
-    // 始终向前查找最近的块起点（def0 优先级最高）
+    // 策略：def0 优先级最高；找到第一个有.num的def1后，继续查找是否有def0
     let blockStartElement = targetDef;
+    let firstDef1WithNum = null;  // 记录第一个找到的带.num的def1
+    let current = targetDef.previousElementSibling;
     
-    // 先检查目标本身是否是块起点
-    const isTargetBlockStart = targetDef.matches('div[data-sc-class="def0"]') || 
-                                (targetDef.matches('div[data-sc-class="def1"]') && targetDef.querySelector('span[data-sc-class="num"]'));
-    
-    if (!isTargetBlockStart) {
-        // 目标不是块起点，向前查找
-        let current = targetDef.previousElementSibling;
-        while (current) {
-            if (current.matches('div[data-sc-class="def0"]') || (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]'))) {
-                blockStartElement = current;
-                // 找到第一个块起点就停止（最近的）
-                break;
+    while (current) {
+        if (current.matches('div[data-sc-class="def0"]')) {
+            // 找到def0，这是最高优先级，立即使用
+            blockStartElement = current;
+            break;
+        } else if (current.matches('div[data-sc-class="def1"]') && current.querySelector('span[data-sc-class="num"]')) {
+            // 找到带.num的def1
+            if (!firstDef1WithNum) {
+                // 记录第一个（最近的）带.num的def1
+                firstDef1WithNum = current;
+                // 继续查找，看前面是否有def0
             }
-            current = current.previousElementSibling;
         }
+        current = current.previousElementSibling;
+    }
+    
+    // 如果没找到def0，但找到了带.num的def1，使用它
+    if (blockStartElement === targetDef && firstDef1WithNum) {
+        blockStartElement = firstDef1WithNum;
     }
     
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
