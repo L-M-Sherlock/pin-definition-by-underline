@@ -62,18 +62,30 @@ function pinByUnderline() {
     
     if (blockStartElement.matches('div[data-sc-class="def0"]')) {
         // 如果块起点是def0（块标记）
-        // 保持原有顺序，只将目标提前，但保留在说明文字等之后
+        // 策略：无.num的说明文字保持在前，目标在所有有.num的项中排第一
         nodesToMove.push(blockStartElement);  // 块标记在最前
         
         if (targetDef !== blockStartElement) {
-            // 找出目标之前和之后的元素
+            // 将块内元素分为三类：
+            // 1. 目标之前的无.num元素（说明文字）
+            // 2. 目标（有.num）
+            // 3. 其他有.num和无.num的元素
             const targetIndex = fullBlockElements.indexOf(targetDef);
-            const beforeTarget = fullBlockElements.slice(1, targetIndex);  // 目标之前的元素（不含blockStartElement）
-            const afterTarget = fullBlockElements.slice(targetIndex + 1);  // 目标之后的元素
+            const beforeTarget = fullBlockElements.slice(1, targetIndex);
+            const afterTarget = fullBlockElements.slice(targetIndex + 1);
             
-            nodesToMove.push(...beforeTarget);  // 目标之前的元素（如说明文字）
-            nodesToMove.push(targetDef);        // 目标
-            nodesToMove.push(...afterTarget);   // 目标之后的元素
+            // 将目标之前的元素分为有.num和无.num
+            const beforeTargetWithoutNum = beforeTarget.filter(el => 
+                !el.querySelector('span[data-sc-class="num"]')
+            );
+            const beforeTargetWithNum = beforeTarget.filter(el => 
+                el.querySelector('span[data-sc-class="num"]')
+            );
+            
+            nodesToMove.push(...beforeTargetWithoutNum);  // 无.num的说明文字保持在前
+            nodesToMove.push(targetDef);                  // 目标紧跟其后
+            nodesToMove.push(...beforeTargetWithNum);     // 目标之前的其他编号项
+            nodesToMove.push(...afterTarget);             // 目标之后的所有元素
         }
     } else {
         // 如果块起点是带.num的def1，没有块标记
@@ -112,8 +124,32 @@ function pinByUnderline() {
                 // 区分两种情况：
                 if (blockStartElement.matches('div[data-sc-class="def0"]')) {
                     // 情况1: blockStartElement是def0（块标记）
-                    // 保持原有顺序，不做重排（说明文字等保持在目标之前）
-                    // 元素已经在正确的位置，无需移动
+                    // 需要重排：将无.num的元素保持在前，目标紧跟其后
+                    const targetIndex = fullBlockElements.indexOf(targetDef);
+                    const beforeTarget = fullBlockElements.slice(1, targetIndex);
+                    const afterTarget = fullBlockElements.slice(targetIndex + 1);
+                    
+                    const beforeTargetWithoutNum = beforeTarget.filter(el => 
+                        !el.querySelector('span[data-sc-class="num"]')
+                    );
+                    const beforeTargetWithNum = beforeTarget.filter(el => 
+                        el.querySelector('span[data-sc-class="num"]')
+                    );
+                    
+                    // 按照nodesToMove的顺序重新插入
+                    if (beforeTargetWithoutNum.length > 0) {
+                        // 有说明文字：def0 → 说明文字 → 目标 → 其他
+                        blockStartElement.after(...beforeTargetWithoutNum);
+                        beforeTargetWithoutNum[beforeTargetWithoutNum.length - 1].after(targetDef);
+                    } else {
+                        // 无说明文字：def0 → 目标 → 其他
+                        blockStartElement.after(targetDef);
+                    }
+                    
+                    if (beforeTargetWithNum.length > 0 || afterTarget.length > 0) {
+                        const restElements = [...beforeTargetWithNum, ...afterTarget];
+                        targetDef.after(...restElements);
+                    }
                 } else {
                     // 情况2: blockStartElement是带.num的def1，没有块标记
                     // 将目标移到blockStartElement前面
