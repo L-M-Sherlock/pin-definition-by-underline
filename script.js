@@ -1,49 +1,50 @@
-// 工具函数
-function hasNum(element) {
-    return element.matches('div[data-sc-class="def1"]') && element.querySelector('span[data-sc-class="num"]');
-}
-
-function isDef0(element) {
-    return element.matches('div[data-sc-class="def0"]');
-}
-
-function hasAncestorDef0(element) {
-    let ancestorCheck = element.previousElementSibling;
-    
-    while (ancestorCheck) {
-        if (isDef0(ancestorCheck)) {
-            return true;
-        } else if (ancestorCheck.matches('div[data-sc-class="def1"]')) {
-            ancestorCheck = ancestorCheck.previousElementSibling;
-        } else {
-            break;
-        }
-    }
-    return false;
-}
-
-function collectSubDefs(startIndex, fullBlockElements) {
-    const subDefs = [];
-    for (let i = startIndex + 1; i < fullBlockElements.length; i++) {
-        const el = fullBlockElements[i];
-        if (el.matches('div[data-sc-class="def1"]') && !hasNum(el)) {
-            subDefs.push(el);
-        } else {
-            break;
-        }
-    }
-    return subDefs;
-}
-
-function prioritizeTarget(targetDef, subDefs) {
-    const targetInSubDefs = subDefs.indexOf(targetDef);
-    if (targetInSubDefs > 0) {
-        subDefs.splice(targetInSubDefs, 1);
-        subDefs.unshift(targetDef);
-    }
-}
-
 function pinByUnderline() {
+    // 工具函数
+    function hasNum(element) {
+        return element.matches('div[data-sc-class="def1"]') && element.querySelector('span[data-sc-class="num"]');
+    }
+
+    function isDef0(element) {
+        return element.matches('div[data-sc-class="def0"]');
+    }
+
+    function hasAncestorDef0(element) {
+        let ancestorCheck = element.previousElementSibling;
+        
+        while (ancestorCheck) {
+            if (isDef0(ancestorCheck)) {
+                return true;
+            } else if (ancestorCheck.matches('div[data-sc-class="def1"]')) {
+                ancestorCheck = ancestorCheck.previousElementSibling;
+            } else {
+                break;
+            }
+        }
+        return false;
+    }
+
+    function collectSubDefs(startIndex, fullBlockElements) {
+        const subDefs = [];
+        for (let i = startIndex + 1; i < fullBlockElements.length; i++) {
+            const el = fullBlockElements[i];
+            if (el.matches('div[data-sc-class="def1"]') && !hasNum(el)) {
+                subDefs.push(el);
+            } else {
+                break;
+            }
+        }
+        return subDefs;
+    }
+
+    function prioritizeTarget(targetDef, subDefs) {
+        const targetInSubDefs = subDefs.indexOf(targetDef);
+        if (targetInSubDefs > 0) {
+            subDefs.splice(targetInSubDefs, 1);
+            subDefs.unshift(targetDef);
+        }
+    }
+
+    // 主逻辑
     const glossary = document.querySelector('.yomitan-glossary');
     if (!glossary) return;
     
