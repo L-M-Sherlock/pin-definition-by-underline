@@ -103,17 +103,10 @@ run_tests() {
     print_message $BLUE "🚀 开始运行测试..."
     echo
     
-    # 记录开始时间
-    local start_time=$(date +%s)
-    
     # 运行测试
     if node "$TEST_FILE"; then
-        local end_time=$(date +%s)
-        local duration=$((end_time - start_time))
-        
         echo
         print_message $GREEN "🎉 所有测试通过！"
-        print_message $GREEN "⏱️  执行时间: ${duration}秒"
     else
         print_message $RED "❌ 测试失败"
         exit 1
@@ -125,7 +118,6 @@ generate_report() {
     print_message $BLUE "📊 生成测试报告..."
     
     local report_file="test-report.md"
-    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
     local case_count=$(find "$CASES_DIR" -name "*.html" | wc -l)
     local output_count=$(find "$OUTPUT_DIR" -name "*_output.html" 2>/dev/null | wc -l)
     
@@ -134,7 +126,6 @@ generate_report() {
 
 **项目**: $PROJECT_NAME  
 **版本**: $VERSION  
-**测试时间**: $timestamp  
 **测试环境**: Node.js $(node --version)
 
 ## 测试结果
@@ -188,7 +179,7 @@ EOF
 - **设计原则**: def0优先、释义单元完整性、分支完整性
 
 ---
-*报告生成时间: $timestamp*
+*报告生成完成*
 EOF
 
     print_message $GREEN "✅ 测试报告已生成: $report_file"

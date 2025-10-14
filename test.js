@@ -142,7 +142,7 @@ function testCase(inputFile, outputDir) {
     <div class="test-info">
         <h2>🧪 测试结果: ${inputFile}</h2>
         <p><strong>输入文件:</strong> cases/${inputFile}</p>
-        <p><strong>测试时间:</strong> ${new Date().toLocaleString()}</p>
+        <p><strong>测试环境:</strong> Node.js ${process.version}</p>
         <p><strong>说明:</strong> 黄色背景表示被置顶的目标释义</p>
     </div>
     
