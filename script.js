@@ -246,7 +246,13 @@ function pinByUnderline() {
     // --- 4. 执行 DOM 操作 ---
 
     // 4a. 高亮目标
-    targetDef.style.backgroundColor = '#fff2a8';
+    // 检测是否为夜间模式
+    const htmlElement = document.documentElement;
+    const isNightMode = htmlElement.classList.contains('night-mode');
+    
+    // 根据模式选择高亮颜色
+    const highlightColor = isNightMode ? '#000000' : '#fff2a8';
+    targetDef.style.backgroundColor = highlightColor;
     
     // 4b. 找到正确的插入点并移动
     // 关键修正：插入点是第一个"真正的"释义块的起点
