@@ -21,6 +21,23 @@
 - ✅ **完整测试** - 9 个测试用例覆盖明镜词典的各种复杂结构
 - 🔧 **Lapis 兼容** - 专为 Lapis 笔记模板的 DOM 结构优化
 
+### 📸 效果展示
+
+<table>
+<tr>
+<td width="50%">
+<b>浅色模式</b><br/>
+<img src="screenshots/light-mode.png" alt="Light Mode"/>
+</td>
+<td width="50%">
+<b>深色模式</b><br/>
+<img src="screenshots/dark-mode.png" alt="Dark Mode"/>
+</td>
+</tr>
+</table>
+
+*✨ 目标释义被自动置顶并用黄色背景高亮显示，让你在复习时一眼看到最相关的定义*
+
 ## 🚀 快速开始
 
 ### 前置要求
