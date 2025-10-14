@@ -1,15 +1,41 @@
 {
   "name": "pin-specific-definition",
-  "version": "1.0.0",
-  "description": "## 项目简介",
+  "version": "1.11.0",
+  "description": "为 Lapis Anki 笔记模板提供的智能释义置顶脚本 - 识别明镜词典卡片中的下划线标记，自动重排和高亮显示目标释义",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test.js",
+    "test:sh": "./test.sh",
+    "test:clean": "./test.sh --clean",
+    "test:report": "./test.sh --report"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "anki",
+    "lapis",
+    "yomitan",
+    "japanese",
+    "mining",
+    "dictionary",
+    "meikyo",
+    "definition",
+    "highlighting",
+    "dom-manipulation",
+    "language-learning"
+  ],
+  "author": "jarrettye",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jarrettye/pin-specific-definition.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jarrettye/pin-specific-definition/issues"
+  },
+  "homepage": "https://github.com/jarrettye/pin-specific-definition#readme",
   "dependencies": {
     "jsdom": "^27.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
