@@ -156,7 +156,7 @@ function testCase(inputFile, outputDir) {
         const formattedHtml = beautify(fullHtml, {
             indent_size: 2,
             indent_char: ' ',
-            max_preserve_newlines: 2,
+            max_preserve_newlines: 1,
             preserve_newlines: true,
             keep_array_indentation: false,
             break_chained_methods: false,
@@ -167,10 +167,15 @@ function testCase(inputFile, outputDir) {
             jslint_happy: false,
             end_with_newline: true,
             wrap_line_length: 0,
-            indent_inner_html: false,
+            indent_inner_html: true,
             comma_first: false,
             e4x: false,
-            indent_empty_lines: false
+            indent_empty_lines: false,
+            wrap_attributes: 'force',
+            wrap_attributes_indent_size: 2,
+            html_indent_handlebars: true,
+            html_indent_inner_html: true,
+            html_indent_body_inner_html: true
         });
         
         fs.writeFileSync(outputPath, formattedHtml, 'utf8');
