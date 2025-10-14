@@ -1,13 +1,13 @@
 # 贡献指南
 
-感谢你对 Pin Specific Definition 项目的关注！我们欢迎所有形式的贡献。
+感谢你对 Pin Definition By Underline 项目的关注！我们欢迎所有形式的贡献。
 
 ## 📖 文档结构
 
 本项目采用清晰的文档分离结构：
 
 ```
-pin-specific-definition/
+pin-definition-by-underline/
 ├── README.md          # 项目介绍、Lapis集成指南、核心特性
 ├── CHANGELOG.md       # 完整版本历史、问题分析、解决方案
 ├── CONTRIBUTING.md    # 本文档 - 贡献指南
@@ -28,8 +28,8 @@ pin-specific-definition/
 
 ```bash
 # 克隆项目
-git clone <repository-url>
-cd pin-specific-definition
+git clone https://github.com/L-M-Sherlock/pin-definition-by-underline.git
+cd pin-definition-by-underline
 
 # 安装依赖
 npm install

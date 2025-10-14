@@ -1,4 +1,4 @@
-# Pin Specific Definition
+# Pin Definition By Underline
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶脚本
 
@@ -169,7 +169,7 @@ npm install
 ## 📁 项目结构
 
 ```
-pin-specific-definition/
+pin-definition-by-underline/
 ├── script.js           # 核心脚本
 ├── test.js             # 自动化测试
 ├── test.sh             # 测试管理脚本

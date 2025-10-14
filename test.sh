@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Pin Specific Definition - 测试脚本
+# Pin Definition By Underline - 测试脚本
 # 用于运行自动化测试并生成测试报告
 
 set -e  # 遇到错误立即退出
@@ -15,7 +15,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # 项目信息
-PROJECT_NAME="Pin Specific Definition"
+PROJECT_NAME="Pin Definition By Underline"
 VERSION="v1.12"
 SCRIPT_FILE="script.js"
 TEST_FILE="test.js"

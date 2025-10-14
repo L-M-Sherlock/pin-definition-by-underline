@@ -1,5 +1,5 @@
 {
-  "name": "pin-specific-definition",
+  "name": "pin-definition-by-underline",
   "version": "1.12.0",
   "description": "为 Lapis Anki 笔记模板提供的智能释义置顶脚本 - 识别明镜词典卡片中的下划线标记，自动重排和高亮显示目标释义",
   "main": "script.js",
@@ -22,16 +22,16 @@
     "dom-manipulation",
     "language-learning"
   ],
-  "author": "jarrettye",
+  "author": "L-M-Sherlock",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jarrettye/pin-specific-definition.git"
+    "url": "https://github.com/L-M-Sherlock/pin-definition-by-underline.git"
   },
   "bugs": {
-    "url": "https://github.com/jarrettye/pin-specific-definition/issues"
+    "url": "https://github.com/L-M-Sherlock/pin-definition-by-underline/issues"
   },
-  "homepage": "https://github.com/jarrettye/pin-specific-definition#readme",
+  "homepage": "https://github.com/L-M-Sherlock/pin-definition-by-underline#readme",
   "dependencies": {
     "jsdom": "^27.0.0"
   },
