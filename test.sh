@@ -125,8 +125,7 @@ generate_report() {
 # 测试报告
 
 **项目**: $PROJECT_NAME  
-**版本**: $VERSION  
-**测试环境**: Node.js $(node --version)
+**版本**: $VERSION
 
 ## 测试结果
 
