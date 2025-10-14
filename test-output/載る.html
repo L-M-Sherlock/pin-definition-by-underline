@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Test Output - 載る.html</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .test-info {
+        background: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+
+      .highlight {
+        background-color: #fff2a8 !important;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+        margin-left: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+        color: orangered;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+        font-size: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+        color: dodgerblue;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+        color: darkgreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+        color: limegreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+        color: darkred;
+        font-weight: bold;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+        margin-left: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="phrase"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="phrase"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+        color: orangered;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+        font-size: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2"] {
+        font-size: 1em;
+        padding-left: 0em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2_first"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2_first"] {
+        font-size: 1em;
+        padding-left: 0em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+        color: dodgerblue;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exam"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exam"] {
+        padding-left: 0em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+        color: darkgreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+        color: limegreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="sanjiao"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="sanjiao"] {
+        color: indigo;
+        background-color: yellow;
+        font-size: 1em;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="canzhao"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="canzhao"] {
+        color: indigo;
+        font-size: 1em;
+        background-color: yellow;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="fanyi"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="fanyi"] {
+        color: indigo;
+        font-size: 1em;
+        background-color: yellow;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="lingxing"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="lingxing"] {
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="square"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="square"] {
+        color: darkturquoise;
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoxian"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoxian"] {
+        color: indigo;
+        font-size: 0.9em;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoji"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoji"] {
+        color: yellow;
+        font-size: 0.9em;
+        background-color: indigo;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="jiu"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="jiu"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="paisheng"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="paisheng"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="keneng"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="keneng"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yixing"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yixing"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="wen"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="wen"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="ming"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="ming"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="zhuyi"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="zhuyi"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dong"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dong"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="shu"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="shu"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yufa"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yufa"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yuyuan"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yuyuan"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+        color: darkred;
+        font-weight: bold;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num_circle"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num_circle"] {
+        color: darkred;
+        font-weight: bold;
+        border-width: 0.15em;
+        border-style: solid;
+        border-color: darkred;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        text-align: center;
+        vertical-align: middle;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakikata"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakikata"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="tsukaikata"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="tsukaikata"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yomiwake"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yomiwake"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakiwake"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakiwake"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="test-info">
+      <h2>🧪 测试结果: 載る.html</h2>
+      <p><strong>输入文件:</strong> cases/載る.html</p>
+      <p><strong>说明:</strong> 黄色背景表示被置顶的目标释义</p>
+    </div>
+
+    <div class="yomitan-glossary">
+      <div style="text-align: left;"
+        class="yomitan-glossary">
+        <ol>
+          <li data-dictionary="明鏡日汉双解辞典"><i>(明鏡日汉双解辞典)</i> <span>
+              <div data-sc-class="mjrhsjcd-entry">
+                <div data-sc-class="head"><span data-sc-class="word"
+                    lang="ja">の・る［乗る・載る］</span><span data-sc-class="type"
+                    lang="ja">⟨自五⟩</span></div>
+                <div data-sc-class="def1"
+                  style="background-color: rgb(255, 242, 168);"><span data-sc-class="num"><u>⑬</u> </span><span data-sc-class="def2"
+                    lang="ja">〖載〗<span lang="ja">印刷物として掲げられる。掲載される。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 登载，刊登，刊载。作为印刷品发表。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">彼女の記事が新聞に～</span>」<span data-sc-class="excn"
+                      lang="zh">她的报道刊登在报纸上</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">ブラックリストに～</span>」<span data-sc-class="excn"
+                      lang="zh">上了黑名单</span></span></div>
+                <div data-sc-class="def1"><span><span data-sc-class="lingxing">◈</span>(1)(2)</span><span lang="ja"><span data-sc-class="fanyi">⇔</span>おりる</span><br><span lang="ja"><span data-sc-class="keneng"
+                      lang="ja">可能</span>乗れる</span><br><span lang="ja"><span data-sc-class="ming"
+                      lang="ja">名</span>乗り</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">① </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">ある物の上に上がる。のっかる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 登上，骑上，坐上。登上某个东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">体重計［ブランコ］に～</span>」<span data-sc-class="excn"
+                      lang="zh">站到体重计上［坐上秋千］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">子が父のひざに～</span>」<span data-sc-class="excn"
+                      lang="zh">孩子骑在父亲的腿上</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">② </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">移動するために乗り物の上または中に身を置く。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 乘，坐，乘坐。为了移动而置身于交通工具之上或者里面。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">馬［車・船・エレベーター］に～</span>」<span data-sc-class="excn"
+                      lang="zh">骑马［乘车・船・电梯］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">③ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">他の流れといっしょになって運ばれる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 乘着，随着。和其他的流动的东西被运走。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">舟が川の流れに～</span>」<span data-sc-class="excn"
+                      lang="zh">船随着河流而下</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">祭り太鼓が風に～・って聞こえてくる</span>」<span data-sc-class="excn"
+                      lang="zh">庙会的鼓声随风飘荡</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">④ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">ものの動きによく合致する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 合拍，趁势。与东西的运动非常合拍。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">勢い［リズム・調子］に～</span>」<span data-sc-class="excn"
+                      lang="zh">趁势［与旋律合拍・与调子合拍］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">～・っている（＝調子づいている）人にはかなわない</span>」<span data-sc-class="excn"
+                      lang="zh">拿走运的人没有办法</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑤ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">《「興が～」などの形で、慣用句的に》ある物事に対して積極的な気持ちになる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （在“興が～”等形式中，是一种惯用形式）有兴致，来兴趣。表示对每件事情有一种积极的态度。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">仕事に興が～</span>」<span data-sc-class="excn"
+                      lang="zh">对工作来兴致</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">今日は練習に気分が～・らない</span>」<span data-sc-class="excn"
+                      lang="zh">今天对练习没有情绪</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑥ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">一定の道筋や進路に従って順調に進む。のっかる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 纳入，进入。循着一定路线、轨迹顺畅前进。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">人工衛星［経営］が軌道に～</span>」<span data-sc-class="excn"
+                      lang="zh">人造卫星［经营］进入轨道</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑦ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">基準とする一定の線に達する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 达到作为基准的一定的线。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">株価が二万円の大台に～</span>」<span data-sc-class="excn"
+                      lang="zh">股价达到2万日元大关</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">生産が採算ラインに～</span>」<span data-sc-class="excn"
+                      lang="zh">生产达到有盈利的程度</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑧ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">適合してよくなじむ。また、十分につく。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 匹配，调和。合适非常调和。或者充分附着上。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">彼の声はマイクによく～</span>」<span data-sc-class="excn"
+                      lang="zh">他的声音很上麦克风</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">おしろいが肌にうまく～・っていない</span>」<span data-sc-class="excn"
+                      lang="zh">脂粉不上皮肤</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">十分に脂が～・って食べごろだ</span>」<span data-sc-class="excn"
+                      lang="zh">很肥，正是吃的时候</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>「よく」など評価を表す副詞を伴うことが多い。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑨ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">相手の依頼や勧誘に応じる。荷担する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 响应，对应。响应对方的托付、劝说。帮助。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">相談［もうけ話］に～</span>」<span data-sc-class="excn"
+                      lang="zh">参与商量［谈论赚钱的事］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑩ </span><span data-sc-class="def2"
+                    lang="ja">〖乗〗<span lang="ja">相手の思わくどおりに動かされる。乗せられる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 上当，中了……（圈套），上了……（圈套）。被迫按照对方的想法行动。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">相手の計略に～</span>」<span data-sc-class="excn"
+                      lang="zh">中了对手的计谋</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">誘惑［おだて］に～</span>」<span data-sc-class="excn"
+                      lang="zh">被诱惑上当［受了煽动］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑪ </span><span data-sc-class="def2"
+                    lang="ja">〖乗・載〗<span lang="ja">〔機械などの大きさや重さについて言って〕その上に乗せることができる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 〔機械などの大きさや重さについて言って〕能够摆上，能够放在。可以放置其上。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">楽にひざの上に～大きさのパソコン</span>」<span data-sc-class="excn"
+                      lang="zh">大小可以方便地放在膝盖上的笔记本电脑</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">大きすぎて荷台には～・らない</span>」<span data-sc-class="excn"
+                      lang="zh">太大，没有办法放在货架上</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑫ </span><span data-sc-class="def2"
+                    lang="ja">〖載〗<span lang="ja">ある物の上に置かれている。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 放在……上。被放置在某个东西上面。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">机に本が～・っている</span>」<span data-sc-class="excn"
+                      lang="zh">书放在桌子上</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">トラックには初荷［家畜］が～・っている</span>」<span data-sc-class="excn"
+                      lang="zh">卡车上装载着新年第一批货［家畜］</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>言い切りでは「～・っている」の形で使う。</span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>(12)の「載」は、主に荷物などの物（物扱いした動物も含む）の場合に使う。「兄が踏み台の上に乗っている（(1)）」「こたつに猫が乗っている（(1)）」「後部座席に妹が乗っている（(2)）」など、人や動物の場合は一般に「乗」を使う。</span></div>
+              </div>
+            </span></li>
+          <style>
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+              margin-left: 1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+              font-size: 1em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+              font-weight: bold;
+              font-size: 1.3em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="phrase"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="phrase"] {
+              font-weight: bold;
+              font-size: 1.3em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+              color: orangered;
+              font-size: 1em;
+              font-weight: bold;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+              font-size: 1em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+              font-size: 1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2"] {
+              font-size: 1em;
+              padding-left: 0em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2_first"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2_first"] {
+              font-size: 1em;
+              padding-left: 0em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+              color: dodgerblue;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exam"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exam"] {
+              padding-left: 0em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+              color: darkgreen;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+              color: limegreen;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="sanjiao"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="sanjiao"] {
+              color: indigo;
+              background-color: yellow;
+              font-size: 1em;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="canzhao"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="canzhao"] {
+              color: indigo;
+              font-size: 1em;
+              background-color: yellow;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="fanyi"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="fanyi"] {
+              color: indigo;
+              font-size: 1em;
+              background-color: yellow;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="lingxing"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="lingxing"] {
+              font-weight: bold;
+              font-size: 1.3em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="square"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="square"] {
+              color: darkturquoise;
+              font-weight: bold;
+              font-size: 1.3em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoxian"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoxian"] {
+              color: indigo;
+              font-size: 0.9em;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoji"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoji"] {
+              color: yellow;
+              font-size: 0.9em;
+              background-color: indigo;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="jiu"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="jiu"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="paisheng"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="paisheng"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="keneng"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="keneng"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yixing"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yixing"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="wen"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="wen"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="ming"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="ming"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="zhuyi"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="zhuyi"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dong"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dong"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="shu"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="shu"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yufa"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yufa"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yuyuan"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yuyuan"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+              color: darkred;
+              font-weight: bold;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num_circle"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num_circle"] {
+              color: darkred;
+              font-weight: bold;
+              border-width: 0.15em;
+              border-style: solid;
+              border-color: darkred;
+              border-radius: 50%;
+              font-size: 0.75rem;
+              text-align: center;
+              vertical-align: middle;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakikata"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakikata"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="tsukaikata"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="tsukaikata"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yomiwake"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yomiwake"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakiwake"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakiwake"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+          </style>
+        </ol>
+      </div>
+    </div>
+  </body>
+
+</html>

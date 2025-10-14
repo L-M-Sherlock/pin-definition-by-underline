@@ -7,7 +7,6 @@ package-lock.json
 yarn.lock
 
 # 测试输出
-test-output/
 test-report.md
 
 # 调试文件
