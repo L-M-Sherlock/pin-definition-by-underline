@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 # 项目信息
 PROJECT_NAME="Pin Specific Definition"
-VERSION="v1.11"
+VERSION="v1.12"
 SCRIPT_FILE="script.js"
 TEST_FILE="test.js"
 CASES_DIR="cases"

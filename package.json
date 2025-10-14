@@ -1,6 +1,6 @@
 {
   "name": "pin-specific-definition",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "description": "为 Lapis Anki 笔记模板提供的智能释义置顶脚本 - 识别明镜词典卡片中的下划线标记，自动重排和高亮显示目标释义",
   "main": "script.js",
   "scripts": {

@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶脚本
 
-[![Version](https://img.shields.io/badge/version-1.11-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.12-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
