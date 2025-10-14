@@ -104,8 +104,9 @@ function pinByUnderline() {
                 break;
             }
         } else {
-            // 如果当前块由带.num的def1开始（无def0），遇到下一个带.num的def1时结束
+            // 如果当前块由带.num的def1开始（无def0），需要更精确的边界判断
             if (nextInBlock.matches('div[data-sc-class="def1"]') && nextInBlock.querySelector('span[data-sc-class="num"]')) {
+                // 遇到下一个有.num的def1，当前块结束
                 break;
             }
         }
@@ -114,49 +115,138 @@ function pinByUnderline() {
     }
     
     // --- 3. 内部重排 ---
-    // 重排顺序取决于blockStartElement的类型
+    // 重排顺序取决于blockStartElement的类型和target的性质
     
     const nodesToMove = [];
     
     if (blockStartElement.matches('div[data-sc-class="def0"]')) {
         // 如果块起点是def0（块标记）
-        // 策略：无.num的说明文字保持在前，目标在所有有.num的项中排第一
         nodesToMove.push(blockStartElement);  // 块标记在最前
         
         if (targetDef !== blockStartElement) {
-            // 将块内元素分为三类：
-            // 1. 目标之前的无.num元素（说明文字）
-            // 2. 目标（有.num）
-            // 3. 其他有.num和无.num的元素
-            const targetIndex = fullBlockElements.indexOf(targetDef);
-            const beforeTarget = fullBlockElements.slice(1, targetIndex);
-            const afterTarget = fullBlockElements.slice(targetIndex + 1);
+            // 检查target是否有.num，决定处理策略
+            const targetHasNum = targetDef.matches('div[data-sc-class="def1"]') && targetDef.querySelector('span[data-sc-class="num"]');
             
-            // 将目标之前的元素分为有.num和无.num
-            const beforeTargetWithoutNum = beforeTarget.filter(el => 
-                !el.querySelector('span[data-sc-class="num"]')
-            );
-            const beforeTargetWithNum = beforeTarget.filter(el => 
-                el.querySelector('span[data-sc-class="num"]')
-            );
-            
-            nodesToMove.push(...beforeTargetWithoutNum);  // 无.num的说明文字保持在前
-            nodesToMove.push(targetDef);                  // 目标紧跟其后
-            nodesToMove.push(...beforeTargetWithNum);     // 目标之前的其他编号项
-            nodesToMove.push(...afterTarget);             // 目标之后的所有元素
+            if (!targetHasNum) {
+                // target无.num，它是某个主释义的子释义
+                // 找到它所属的主释义
+                const targetIndex = fullBlockElements.indexOf(targetDef);
+                let mainDef = null;
+                
+                // 向前查找最近的有.num的def1
+                for (let i = targetIndex - 1; i >= 1; i--) {
+                    const el = fullBlockElements[i];
+                    if (el.matches('div[data-sc-class="def1"]') && el.querySelector('span[data-sc-class="num"]')) {
+                        mainDef = el;
+                        break;
+                    }
+                }
+                
+                if (mainDef) {
+                    // 找到主释义，收集主释义及其所有子释义
+                    const mainDefIndex = fullBlockElements.indexOf(mainDef);
+                    const subDefs = [];
+                    
+                    // 收集主释义后面的所有无.num的def1
+                    for (let i = mainDefIndex + 1; i < fullBlockElements.length; i++) {
+                        const el = fullBlockElements[i];
+                        if (el.matches('div[data-sc-class="def1"]') && !el.querySelector('span[data-sc-class="num"]')) {
+                            subDefs.push(el);
+                        } else {
+                            break;
+                        }
+                    }
+                    
+                    // 将target移到subDefs的最前面
+                    const targetInSubDefs = subDefs.indexOf(targetDef);
+                    if (targetInSubDefs > 0) {
+                        subDefs.splice(targetInSubDefs, 1);
+                        subDefs.unshift(targetDef);
+                    }
+                    
+                    // 其他元素（不包括主释义和子释义）
+                    const otherParts = fullBlockElements.filter(el => 
+                        el !== blockStartElement && el !== mainDef && !subDefs.includes(el)
+                    );
+                    
+                    nodesToMove.push(mainDef);        // 主释义
+                    nodesToMove.push(...subDefs);     // 子释义（target优先）
+                    nodesToMove.push(...otherParts);  // 其他元素
+                } else {
+                    // 没找到主释义，按原来的逻辑处理
+                    const targetIndex = fullBlockElements.indexOf(targetDef);
+                    const beforeTarget = fullBlockElements.slice(1, targetIndex);
+                    const afterTarget = fullBlockElements.slice(targetIndex + 1);
+                    
+                    nodesToMove.push(...beforeTarget);
+                    nodesToMove.push(targetDef);
+                    nodesToMove.push(...afterTarget);
+                }
+            } else {
+                // target有.num，按原来的逻辑处理
+                const targetIndex = fullBlockElements.indexOf(targetDef);
+                const beforeTarget = fullBlockElements.slice(1, targetIndex);
+                const afterTarget = fullBlockElements.slice(targetIndex + 1);
+                
+                const beforeTargetWithoutNum = beforeTarget.filter(el => 
+                    !el.querySelector('span[data-sc-class="num"]')
+                );
+                const beforeTargetWithNum = beforeTarget.filter(el => 
+                    el.querySelector('span[data-sc-class="num"]')
+                );
+                
+                nodesToMove.push(...beforeTargetWithoutNum);
+                nodesToMove.push(targetDef);
+                nodesToMove.push(...beforeTargetWithNum);
+                nodesToMove.push(...afterTarget);
+            }
         }
     } else {
         // 如果块起点是带.num的def1，没有块标记
-        const otherParts = fullBlockElements.filter(el => 
-            el !== blockStartElement && el !== targetDef
-        );
-        
-        // 策略：块起点保持在前，目标紧跟其后（与def0块的无说明文字情况一致）
-        nodesToMove.push(blockStartElement);  // 块起点在最前
-        if (targetDef !== blockStartElement) {
-            nodesToMove.push(targetDef);      // 目标紧跟块起点
+        // 关键改进：需要特殊处理target是无.num的情况
+        if (!targetDef.matches('div[data-sc-class="def1"]') || !targetDef.querySelector('span[data-sc-class="num"]')) {
+            // Target无.num，它是blockStartElement的子释义
+            // 策略：将blockStartElement及其所有子释义（连续的无.num的def1）作为一个整体
+            const mainDef = blockStartElement;  // 主释义（有.num）
+            const targetIndex = fullBlockElements.indexOf(targetDef);
+            
+            // 找到主释义后面连续的所有无.num的def1（包括target）
+            const mainDefIndex = fullBlockElements.indexOf(mainDef);
+            const subDefs = [];
+            for (let i = mainDefIndex + 1; i < fullBlockElements.length; i++) {
+                const el = fullBlockElements[i];
+                if (el.matches('div[data-sc-class="def1"]') && !el.querySelector('span[data-sc-class="num"]')) {
+                    subDefs.push(el);
+                } else {
+                    break;  // 遇到有.num的def1，停止收集子释义
+                }
+            }
+            
+            // 将target移到subDefs的最前面
+            const targetInSubDefs = subDefs.indexOf(targetDef);
+            if (targetInSubDefs > 0) {
+                subDefs.splice(targetInSubDefs, 1);
+                subDefs.unshift(targetDef);
+            }
+            
+            // 其他元素（不包括主释义和子释义）
+            const otherParts = fullBlockElements.filter(el => 
+                el !== mainDef && !subDefs.includes(el)
+            );
+            
+            nodesToMove.push(mainDef);        // 主释义在最前
+            nodesToMove.push(...subDefs);     // 子释义紧跟主释义（target在最前）
+            nodesToMove.push(...otherParts);  // 其他元素排在最后
+        } else {
+            // Target有.num，按原来的逻辑处理
+            const otherParts = fullBlockElements.filter(el => 
+                el !== blockStartElement && el !== targetDef
+            );
+            
+            nodesToMove.push(blockStartElement);  // 块起点在最前
+            nodesToMove.push(targetDef);          // 目标紧跟块起点
+            nodesToMove.push(...otherParts);      // 其他元素排在最后
         }
-        nodesToMove.push(...otherParts);      // 其他元素排在最后
     }
     
     // --- 4. 执行 DOM 操作 ---
@@ -211,16 +301,47 @@ function pinByUnderline() {
                     }
                 } else {
                     // 情况2: blockStartElement是带.num的def1，没有块标记
-                    // 策略：块起点保持在前，目标紧跟其后
-                    if (targetDef !== blockStartElement) {
-                        const otherParts = fullBlockElements.filter(el => 
-                            el !== blockStartElement && el !== targetDef
-                        );
+                    // 需要检查是否使用了子释义处理逻辑
+                    if (!targetDef.matches('div[data-sc-class="def1"]') || !targetDef.querySelector('span[data-sc-class="num"]')) {
+                        // 使用了子释义处理逻辑，按照nodesToMove的顺序重新插入
+                        // nodesToMove已经包含了正确的顺序：[mainDef, ...subDefs, ...otherParts]
+                        const mainDef = nodesToMove[0];
+                        const subDefs = [];
+                        const otherParts = [];
                         
-                        // 将目标移到块起点之后
-                        blockStartElement.after(targetDef);
-                        if (otherParts.length > 0) {
-                            targetDef.after(...otherParts);
+                        let i = 1;
+                        // 收集子释义（连续的无.num的def1）
+                        while (i < nodesToMove.length && 
+                               !nodesToMove[i].matches('div[data-sc-class="def1"]') || 
+                               !nodesToMove[i].querySelector('span[data-sc-class="num"]')) {
+                            subDefs.push(nodesToMove[i]);
+                            i++;
+                        }
+                        
+                        // 其余的是其他元素
+                        otherParts.push(...nodesToMove.slice(i));
+                        
+                        // 重新插入
+                        if (subDefs.length > 0) {
+                            mainDef.after(...subDefs);
+                            if (otherParts.length > 0) {
+                                subDefs[subDefs.length - 1].after(...otherParts);
+                            }
+                        } else if (otherParts.length > 0) {
+                            mainDef.after(...otherParts);
+                        }
+                    } else {
+                        // 使用简单的处理逻辑
+                        if (targetDef !== blockStartElement) {
+                            const otherParts = fullBlockElements.filter(el => 
+                                el !== blockStartElement && el !== targetDef
+                            );
+                            
+                            // 将目标移到块起点之后
+                            blockStartElement.after(targetDef);
+                            if (otherParts.length > 0) {
+                                targetDef.after(...otherParts);
+                            }
                         }
                     }
                 }
