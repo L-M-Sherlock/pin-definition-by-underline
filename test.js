@@ -97,7 +97,7 @@ function testCase(inputFile, outputDir) {
         const resultHtml = container.innerHTML;
         
         // 保存输出
-        const outputFile = inputFile.replace('.html', '_output.html');
+        const outputFile = inputFile;
         const outputPath = path.join(outputDir, outputFile);
         
         // 确保输出目录存在

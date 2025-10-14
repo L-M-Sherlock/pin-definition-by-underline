@@ -119,7 +119,7 @@ generate_report() {
     
     local report_file="test-report.md"
     local case_count=$(find "$CASES_DIR" -name "*.html" | wc -l)
-    local output_count=$(find "$OUTPUT_DIR" -name "*_output.html" 2>/dev/null | wc -l)
+    local output_count=$(find "$OUTPUT_DIR" -name "*.html" 2>/dev/null | wc -l)
     
     cat > "$report_file" << EOF
 # 测试报告
@@ -154,10 +154,10 @@ EOF
 
     # 添加输出文件列表
     if [ -d "$OUTPUT_DIR" ]; then
-        for file in "$OUTPUT_DIR"/*_output.html; do
+        for file in "$OUTPUT_DIR"/*.html; do
             if [ -f "$file" ]; then
-                local basename=$(basename "$file" _output.html)
-                echo "- \`${basename}_output.html\`" >> "$report_file"
+                local basename=$(basename "$file")
+                echo "- \`${basename}\`" >> "$report_file"
             fi
         done
     fi
