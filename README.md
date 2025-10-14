@@ -1,6 +1,6 @@
 # Pin Definition By Underline
 
-> 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶脚本
+> 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
 [![Version](https://img.shields.io/badge/version-1.12-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
@@ -8,9 +8,9 @@
 
 ## 📖 简介
 
-这是一个为 [Lapis Anki 笔记模板](https://github.com/donkuri/lapis)增强功能的脚本，专门用于处理**基于明镜日汉双解词典 Yomitan 1.4.4 版本**制作的词汇卡片。
+这是一个为 [Lapis Anki 笔记模板](https://github.com/donkuri/lapis)增强功能的函数，专门用于处理**基于明镜日汉双解词典 Yomitan 1.4.4 版本**制作的词汇卡片。
 
-当你在 Anki 卡片的释义中使用下划线 `<u>` 标记特定释义的编号时，这个脚本能够自动识别并将该释义**置顶并高亮显示**，让你在复习时快速聚焦到最相关的定义。
+当你在 Anki 卡片的释义中使用下划线 `<u>` 标记特定释义的编号时，这个函数能够自动识别并将该释义**置顶并高亮显示**，让你在复习时快速聚焦到最相关的定义。
 
 ### ✨ 核心特性
 
@@ -49,32 +49,37 @@
 
 ### 使用方法
 
-⚠️ **重要**：本脚本不支持独立使用，必须集成到 Lapis 模板中。
+⚠️ **重要**：本函数不支持独立使用，必须集成到 Lapis 模板中。
 
 #### 集成到 Lapis 模板
 
 **步骤**：
-1. 在 Anki 中打开「卡片管理」
-2. 选择 Lapis 笔记类型
-3. 点击「卡片」按钮进入模板编辑
-4. 在「Template」标签页中找到 `initialize()` 函数
-5. 在 `initialize()` 函数内部添加 `pinByUnderline()` 调用
+1. 在 Anki 中打开「浏览」，切换到卡片视图
+2. 选择一张 Lapis 模板的卡片，进入卡片编辑界面
+3. 点击「卡片…」按钮进入模板编辑界面
+4. 在「背面内容模板」标签页中找到 `initialize()` 函数
+5. 在 `initialize()` 函数上方添加 [`./script.js`](./script.js) 文件内的 `pinByUnderline()` 函数
+6. 在 `initialize()` 函数内部添加 `pinByUnderline()` 调用
 
 **具体操作**：
 ```javascript
-function initialize() {
-    splitTags();
-    handlePitches();
-    setUpDefToggle();
-    clickImages();
-    formatFrequencyList();
-    setDHHeight();
-    hideCorrectDefinition();
-    movePrimaryDicts();
-    userSettings();
-    pinByUnderline();  // ← 在这里添加
-    //在此调用新的函数
-}
+    function pinByUnderline() {
+        ...代码...
+    }
+
+    // Initialize all functions!!!
+    function initialize() {
+        splitTags();
+        handlePitches();
+        setUpDefToggle();
+        clickImages();
+        formatFrequencyList();
+        setDHHeight();
+        hideCorrectDefinition();
+        movePrimaryDicts();
+        userSettings();
+        pinByUnderline(); // 在此调用新的函数
+    }
 ```
 
 **添加函数代码**：
@@ -84,7 +89,7 @@ function initialize() {
 
 #### 开发测试（可选）
 
-如果你要修改或测试脚本：
+如果你要修改或测试函数：
 
 ```bash
 # 安装依赖
@@ -133,7 +138,7 @@ npm install
 
 ### 2. 智能块识别
 
-脚本识别两种释义块结构：
+函数识别两种释义块结构：
 
 #### A. def0 块（带块标记）
 ```html
@@ -187,9 +192,9 @@ npm install
 
 ```
 pin-definition-by-underline/
-├── script.js           # 核心脚本
+├── script.js           # 核心函数
 ├── test.js             # 自动化测试
-├── test.sh             # 测试管理脚本
+├── test.sh             # 测试管理函数
 ├── README.md          # 项目文档
 ├── CHANGELOG.md        # 版本历史
 ├── CONTRIBUTING.md     # 贡献指南
@@ -268,7 +273,7 @@ if (targetHasNum) {
 
 ### DOM 结构依赖
 
-脚本依赖明镜日汉双解词典（Yomitan 1.4.4）特定的 DOM 结构：
+函数依赖明镜日汉双解词典（Yomitan 1.4.4）特定的 DOM 结构：
 
 | 选择器 | 说明 | 示例 |
 |--------|------|------|
@@ -290,12 +295,12 @@ if (targetHasNum) {
 
 ## ⚠️ 注意事项
 
-1. **集成要求** - ⚠️ **脚本不支持独立使用**，必须集成到 Lapis 模板的 `initialize()` 函数中
+1. **集成要求** - ⚠️ **函数不支持独立使用**，必须集成到 Lapis 模板的 `initialize()` 函数中
 2. **标记方式** - 需要在 Anki 卡片编辑时，给释义编号添加 `<u>` 标签（如 `<u>②</u>`）
 3. **词典要求** - 目前仅支持明镜日汉双解词典（Yomitan 1.4.4）的 DOM 结构
-4. **Lapis 模板** - 脚本专为 Lapis 笔记模板优化，其他模板可能需要调整
+4. **Lapis 模板** - 函数专为 Lapis 笔记模板优化，其他模板可能需要调整
 5. **模板修改** - 修改 Lapis 模板会影响所有使用该模板的卡片
-6. **性能考虑** - 脚本在卡片加载时自动执行，无需手动调用
+6. **性能考虑** - 函数在卡片加载时自动执行，无需手动调用
 
 ## 📜 版本历史
 
