@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const beautify = require('js-beautify').html;
 
 // 模拟DOM环境
 global.document = {
@@ -151,7 +152,28 @@ function testCase(inputFile, outputDir) {
 </body>
 </html>`;
         
-        fs.writeFileSync(outputPath, fullHtml, 'utf8');
+        // 格式化HTML
+        const formattedHtml = beautify(fullHtml, {
+            indent_size: 2,
+            indent_char: ' ',
+            max_preserve_newlines: 2,
+            preserve_newlines: true,
+            keep_array_indentation: false,
+            break_chained_methods: false,
+            indent_scripts: 'normal',
+            brace_style: 'collapse',
+            space_before_conditional: true,
+            unescape_strings: false,
+            jslint_happy: false,
+            end_with_newline: true,
+            wrap_line_length: 0,
+            indent_inner_html: false,
+            comma_first: false,
+            e4x: false,
+            indent_empty_lines: false
+        });
+        
+        fs.writeFileSync(outputPath, formattedHtml, 'utf8');
         
         console.log(`✅ 测试完成: ${outputFile}`);
         return true;

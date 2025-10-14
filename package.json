@@ -37,5 +37,8 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "js-beautify": "^1.15.4"
   }
 }
