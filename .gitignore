@@ -1,0 +1,67 @@
+# Node.js 依赖
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# 测试输出
+test-output/
+test-report.md
+
+# 调试文件
+debug-*.js
+*.log
+
+# macOS 系统文件
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# macOS 缩略图
+Thumbs.db
+
+# Windows 系统文件
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux 系统文件
+*~
+.directory
+
+# IDE 和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# 临时文件
+*.tmp
+*.temp
+*.bak
+*.backup
+.cache/
+
+# 构建产物
+dist/
+build/
+out/
+*.min.js
+*.bundle.js
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 其他
+coverage/
+.nyc_output/
