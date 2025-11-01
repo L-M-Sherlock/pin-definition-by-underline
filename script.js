@@ -10,7 +10,7 @@ function pinByUnderline() {
 
     function hasAncestorDef0(element) {
         let ancestorCheck = element.previousElementSibling;
-        
+
         while (ancestorCheck) {
             if (isDef0(ancestorCheck)) {
                 return true;
@@ -47,14 +47,14 @@ function pinByUnderline() {
     // 主逻辑
     const glossary = document.querySelector('.yomitan-glossary');
     if (!glossary) return;
-    
+
     const underlinedElement = glossary.querySelector('u');
     if (!underlinedElement) return;
 
     // --- 1. 定位 ---
     const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
     if (!targetDef) return;
-    
+
     const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
     if (!entryContainer) return;
 
@@ -66,10 +66,10 @@ function pinByUnderline() {
     // 关键改进：区分target本身是否有.num，采用不同的查找策略
     let blockStartElement = targetDef;
     let current = targetDef.previousElementSibling;
-    
+
     // 检查target本身是否有.num - 这决定了查找策略
     const targetHasNum = hasNum(targetDef);
-    
+
     if (targetHasNum) {
         // Target本身有.num，它可能是一个独立的块
         // 关键：需要区分"同块内的编号项"和"平级的独立块"
@@ -91,7 +91,7 @@ function pinByUnderline() {
         // Target本身没有.num，它从属于前面的某个块
         // 向前查找最近的有.num的def1或def0
         let firstDef1WithNum = null;
-        
+
         while (current) {
             if (isDef0(current)) {
                 // 找到def0，这是最高优先级
@@ -106,20 +106,20 @@ function pinByUnderline() {
             }
             current = current.previousElementSibling;
         }
-        
+
         // 如果没找到def0，但找到了带.num的def1，使用它
         if (blockStartElement === targetDef && firstDef1WithNum) {
             blockStartElement = firstDef1WithNum;
         }
     }
-    
+
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
     const fullBlockElements = [blockStartElement];
     let nextInBlock = blockStartElement.nextElementSibling;
-    
+
     // 判断块结束的条件取决于块起点的类型
     const isBlockStartedByDef0 = isDef0(blockStartElement);
-    
+
     while (nextInBlock) {
         // 遇到下一个块的起点时，当前块结束
         if (isBlockStartedByDef0) {
@@ -137,26 +137,26 @@ function pinByUnderline() {
         fullBlockElements.push(nextInBlock);
         nextInBlock = nextInBlock.nextElementSibling;
     }
-    
+
     // --- 3. 内部重排 ---
     // 重排顺序取决于blockStartElement的类型和target的性质
-    
+
     const nodesToMove = [];
-    
+
     if (isDef0(blockStartElement)) {
         // 如果块起点是def0（块标记）
         nodesToMove.push(blockStartElement);  // 块标记在最前
-        
+
         if (targetDef !== blockStartElement) {
             // 检查target是否有.num，决定处理策略
             const targetHasNum = hasNum(targetDef);
-            
+
             if (!targetHasNum) {
                 // target无.num，它是某个主释义的子释义
                 // 找到它所属的主释义
                 const targetIndex = fullBlockElements.indexOf(targetDef);
                 let mainDef = null;
-                
+
                 // 向前查找最近的有.num的def1
                 for (let i = targetIndex - 1; i >= 1; i--) {
                     const el = fullBlockElements[i];
@@ -165,20 +165,20 @@ function pinByUnderline() {
                         break;
                     }
                 }
-                
+
                 if (mainDef) {
                     // 找到主释义，收集主释义及其所有子释义
                     const mainDefIndex = fullBlockElements.indexOf(mainDef);
                     const subDefs = collectSubDefs(mainDefIndex, fullBlockElements);
-                    
+
                     // 将target移到subDefs的最前面
                     prioritizeTarget(targetDef, subDefs);
-                    
+
                     // 其他元素（不包括主释义和子释义）
-                    const otherParts = fullBlockElements.filter(el => 
+                    const otherParts = fullBlockElements.filter(el =>
                         el !== blockStartElement && el !== mainDef && !subDefs.includes(el)
                     );
-                    
+
                     nodesToMove.push(mainDef);        // 主释义
                     nodesToMove.push(...subDefs);     // 子释义（target优先）
                     nodesToMove.push(...otherParts);  // 其他元素
@@ -187,24 +187,95 @@ function pinByUnderline() {
                     const targetIndex = fullBlockElements.indexOf(targetDef);
                     const beforeTarget = fullBlockElements.slice(1, targetIndex);
                     const afterTarget = fullBlockElements.slice(targetIndex + 1);
-                    
+
                     nodesToMove.push(...beforeTarget);
                     nodesToMove.push(targetDef);
                     nodesToMove.push(...afterTarget);
                 }
             } else {
-                // target有.num，按原来的逻辑处理
-                const targetIndex = fullBlockElements.indexOf(targetDef);
-                const beforeTarget = fullBlockElements.slice(1, targetIndex);
-                const afterTarget = fullBlockElements.slice(targetIndex + 1);
-                
-                const beforeTargetWithoutNum = beforeTarget.filter(el => !hasNum(el));
-                const beforeTargetWithNum = beforeTarget.filter(el => hasNum(el));
-                
-                nodesToMove.push(...beforeTargetWithoutNum);
-                nodesToMove.push(targetDef);
-                nodesToMove.push(...beforeTargetWithNum);
-                nodesToMove.push(...afterTarget);
+                // target有.num，确保所属主释义与其子释义整体移动
+                const blockBody = fullBlockElements.slice(1);
+                const preamble = [];
+                const numberedGroups = [];
+                let bodyIndex = 0;
+
+                while (bodyIndex < blockBody.length) {
+                    const element = blockBody[bodyIndex];
+
+                    if (hasNum(element)) {
+                        const group = [element];
+                        bodyIndex++;
+
+                        while (
+                            bodyIndex < blockBody.length &&
+                            blockBody[bodyIndex].matches('div[data-sc-class="def1"]') &&
+                            !hasNum(blockBody[bodyIndex])
+                        ) {
+                            group.push(blockBody[bodyIndex]);
+                            bodyIndex++;
+                        }
+
+                        numberedGroups.push(group);
+                    } else {
+                        if (numberedGroups.length === 0) {
+                            preamble.push(element);
+                        } else {
+                            numberedGroups[numberedGroups.length - 1].push(element);
+                        }
+                        bodyIndex++;
+                    }
+                }
+
+                const targetGroupIndex = numberedGroups.findIndex(group => group.includes(targetDef));
+
+                if (targetGroupIndex !== -1) {
+                    const included = new Set(nodesToMove);
+
+                    for (const element of preamble) {
+                        if (!included.has(element)) {
+                            nodesToMove.push(element);
+                            included.add(element);
+                        }
+                    }
+
+                    const targetGroup = numberedGroups[targetGroupIndex];
+                    for (const element of targetGroup) {
+                        if (!included.has(element)) {
+                            nodesToMove.push(element);
+                            included.add(element);
+                        }
+                    }
+
+                    numberedGroups.forEach((group, index) => {
+                        if (index === targetGroupIndex) return;
+                        for (const element of group) {
+                            if (!included.has(element)) {
+                                nodesToMove.push(element);
+                                included.add(element);
+                            }
+                        }
+                    });
+
+                    for (const element of blockBody) {
+                        if (!included.has(element)) {
+                            nodesToMove.push(element);
+                            included.add(element);
+                        }
+                    }
+                } else {
+                    // 极端情况 fallback
+                    const targetIndex = fullBlockElements.indexOf(targetDef);
+                    const beforeTarget = fullBlockElements.slice(1, targetIndex);
+                    const afterTarget = fullBlockElements.slice(targetIndex + 1);
+
+                    const beforeTargetWithoutNum = beforeTarget.filter(el => !hasNum(el));
+                    const beforeTargetWithNum = beforeTarget.filter(el => hasNum(el));
+
+                    nodesToMove.push(...beforeTargetWithoutNum);
+                    nodesToMove.push(targetDef);
+                    nodesToMove.push(...beforeTargetWithNum);
+                    nodesToMove.push(...afterTarget);
+                }
             }
         }
     } else {
@@ -215,45 +286,45 @@ function pinByUnderline() {
             // 策略：将blockStartElement及其所有子释义（连续的无.num的def1）作为一个整体
             const mainDef = blockStartElement;  // 主释义（有.num）
             const targetIndex = fullBlockElements.indexOf(targetDef);
-            
+
             // 找到主释义后面连续的所有无.num的def1（包括target）
             const mainDefIndex = fullBlockElements.indexOf(mainDef);
             const subDefs = collectSubDefs(mainDefIndex, fullBlockElements);
-            
+
             // 将target移到subDefs的最前面
             prioritizeTarget(targetDef, subDefs);
-            
+
             // 其他元素（不包括主释义和子释义）
-            const otherParts = fullBlockElements.filter(el => 
+            const otherParts = fullBlockElements.filter(el =>
                 el !== mainDef && !subDefs.includes(el)
             );
-            
+
             nodesToMove.push(mainDef);        // 主释义在最前
             nodesToMove.push(...subDefs);     // 子释义紧跟主释义（target在最前）
             nodesToMove.push(...otherParts);  // 其他元素排在最后
         } else {
             // Target有.num，按原来的逻辑处理
-            const otherParts = fullBlockElements.filter(el => 
+            const otherParts = fullBlockElements.filter(el =>
                 el !== blockStartElement && el !== targetDef
             );
-            
+
             nodesToMove.push(blockStartElement);  // 块起点在最前
             nodesToMove.push(targetDef);          // 目标紧跟块起点
             nodesToMove.push(...otherParts);      // 其他元素排在最后
         }
     }
-    
+
     // --- 4. 执行 DOM 操作 ---
 
     // 4a. 高亮目标
     // 检测是否为夜间模式
     const htmlElement = document.documentElement;
     const isNightMode = htmlElement.classList.contains('night-mode');
-    
+
     // 根据模式选择高亮颜色
     const highlightColor = isNightMode ? '#000000' : '#fff2a8';
     targetDef.style.backgroundColor = highlightColor;
-    
+
     // 4b. 找到正确的插入点并移动
     // 关键修正：插入点是第一个"真正的"释义块的起点
     let insertionPoint = null;
@@ -268,78 +339,14 @@ function pinByUnderline() {
 
     if (insertionPoint) {
         if (insertionPoint === blockStartElement) {
-            // 当前块已经是第一个块，只需要块内重排
-            if (targetDef !== blockStartElement) {
-                // 区分两种情况：
-                if (isDef0(blockStartElement)) {
-                    // 情况1: blockStartElement是def0（块标记）
-                    // 需要重排：将无.num的元素保持在前，目标紧跟其后
-                    const targetIndex = fullBlockElements.indexOf(targetDef);
-                    const beforeTarget = fullBlockElements.slice(1, targetIndex);
-                    const afterTarget = fullBlockElements.slice(targetIndex + 1);
-                    
-                    const beforeTargetWithoutNum = beforeTarget.filter(el => !hasNum(el));
-                    const beforeTargetWithNum = beforeTarget.filter(el => hasNum(el));
-                    
-                    // 按照nodesToMove的顺序重新插入
-                    if (beforeTargetWithoutNum.length > 0) {
-                        // 有说明文字：def0 → 说明文字 → 目标 → 其他
-                        blockStartElement.after(...beforeTargetWithoutNum);
-                        beforeTargetWithoutNum[beforeTargetWithoutNum.length - 1].after(targetDef);
-                    } else {
-                        // 无说明文字：def0 → 目标 → 其他
-                        blockStartElement.after(targetDef);
+            if (nodesToMove.length > 1) {
+                let lastNode = nodesToMove[0];
+                for (let index = 1; index < nodesToMove.length; index++) {
+                    const currentNode = nodesToMove[index];
+                    if (currentNode.previousElementSibling !== lastNode) {
+                        lastNode.after(currentNode);
                     }
-                    
-                    if (beforeTargetWithNum.length > 0 || afterTarget.length > 0) {
-                        const restElements = [...beforeTargetWithNum, ...afterTarget];
-                        targetDef.after(...restElements);
-                    }
-                } else {
-                    // 情况2: blockStartElement是带.num的def1，没有块标记
-                    // 需要检查是否使用了子释义处理逻辑
-                    if (!hasNum(targetDef)) {
-                        // 使用了子释义处理逻辑，按照nodesToMove的顺序重新插入
-                        // nodesToMove已经包含了正确的顺序：[mainDef, ...subDefs, ...otherParts]
-                        const mainDef = nodesToMove[0];
-                        const subDefs = [];
-                        const otherParts = [];
-                        
-                        let i = 1;
-                        // 收集子释义（连续的无.num的def1）
-                        while (i < nodesToMove.length && 
-                               (!nodesToMove[i].matches('div[data-sc-class="def1"]') || 
-                                !hasNum(nodesToMove[i]))) {
-                            subDefs.push(nodesToMove[i]);
-                            i++;
-                        }
-                        
-                        // 其余的是其他元素
-                        otherParts.push(...nodesToMove.slice(i));
-                        
-                        // 重新插入
-                        if (subDefs.length > 0) {
-                            mainDef.after(...subDefs);
-                            if (otherParts.length > 0) {
-                                subDefs[subDefs.length - 1].after(...otherParts);
-                            }
-                        } else if (otherParts.length > 0) {
-                            mainDef.after(...otherParts);
-                        }
-                    } else {
-                        // 使用简单的处理逻辑
-                        if (targetDef !== blockStartElement) {
-                            const otherParts = fullBlockElements.filter(el => 
-                                el !== blockStartElement && el !== targetDef
-                            );
-                            
-                            // 将目标移到块起点之后
-                            blockStartElement.after(targetDef);
-                            if (otherParts.length > 0) {
-                                targetDef.after(...otherParts);
-                            }
-                        }
-                    }
+                    lastNode = currentNode;
                 }
             }
         } else {
