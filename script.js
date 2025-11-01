@@ -10,7 +10,7 @@ function pinByUnderline() {
 
     function hasAncestorDef0(element) {
         let ancestorCheck = element.previousElementSibling;
-        
+
         while (ancestorCheck) {
             if (isDef0(ancestorCheck)) {
                 return true;
@@ -47,14 +47,14 @@ function pinByUnderline() {
     // 主逻辑
     const glossary = document.querySelector('.yomitan-glossary');
     if (!glossary) return;
-    
+
     const underlinedElement = glossary.querySelector('u');
     if (!underlinedElement) return;
 
     // --- 1. 定位 ---
     const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
     if (!targetDef) return;
-    
+
     const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
     if (!entryContainer) return;
 
@@ -66,10 +66,10 @@ function pinByUnderline() {
     // 关键改进：区分target本身是否有.num，采用不同的查找策略
     let blockStartElement = targetDef;
     let current = targetDef.previousElementSibling;
-    
+
     // 检查target本身是否有.num - 这决定了查找策略
     const targetHasNum = hasNum(targetDef);
-    
+
     if (targetHasNum) {
         // Target本身有.num，它可能是一个独立的块
         // 关键：需要区分"同块内的编号项"和"平级的独立块"
@@ -91,7 +91,7 @@ function pinByUnderline() {
         // Target本身没有.num，它从属于前面的某个块
         // 向前查找最近的有.num的def1或def0
         let firstDef1WithNum = null;
-        
+
         while (current) {
             if (isDef0(current)) {
                 // 找到def0，这是最高优先级
@@ -106,20 +106,20 @@ function pinByUnderline() {
             }
             current = current.previousElementSibling;
         }
-        
+
         // 如果没找到def0，但找到了带.num的def1，使用它
         if (blockStartElement === targetDef && firstDef1WithNum) {
             blockStartElement = firstDef1WithNum;
         }
     }
-    
+
     // 2b. 从这个真正的起点开始，收集所有属于该块的元素
     const fullBlockElements = [blockStartElement];
     let nextInBlock = blockStartElement.nextElementSibling;
-    
+
     // 判断块结束的条件取决于块起点的类型
     const isBlockStartedByDef0 = isDef0(blockStartElement);
-    
+
     while (nextInBlock) {
         // 遇到下一个块的起点时，当前块结束
         if (isBlockStartedByDef0) {
@@ -137,26 +137,26 @@ function pinByUnderline() {
         fullBlockElements.push(nextInBlock);
         nextInBlock = nextInBlock.nextElementSibling;
     }
-    
+
     // --- 3. 内部重排 ---
     // 重排顺序取决于blockStartElement的类型和target的性质
-    
+
     const nodesToMove = [];
-    
+
     if (isDef0(blockStartElement)) {
         // 如果块起点是def0（块标记）
         nodesToMove.push(blockStartElement);  // 块标记在最前
-        
+
         if (targetDef !== blockStartElement) {
             // 检查target是否有.num，决定处理策略
             const targetHasNum = hasNum(targetDef);
-            
+
             if (!targetHasNum) {
                 // target无.num，它是某个主释义的子释义
                 // 找到它所属的主释义
                 const targetIndex = fullBlockElements.indexOf(targetDef);
                 let mainDef = null;
-                
+
                 // 向前查找最近的有.num的def1
                 for (let i = targetIndex - 1; i >= 1; i--) {
                     const el = fullBlockElements[i];
@@ -165,20 +165,20 @@ function pinByUnderline() {
                         break;
                     }
                 }
-                
+
                 if (mainDef) {
                     // 找到主释义，收集主释义及其所有子释义
                     const mainDefIndex = fullBlockElements.indexOf(mainDef);
                     const subDefs = collectSubDefs(mainDefIndex, fullBlockElements);
-                    
+
                     // 将target移到subDefs的最前面
                     prioritizeTarget(targetDef, subDefs);
-                    
+
                     // 其他元素（不包括主释义和子释义）
-                    const otherParts = fullBlockElements.filter(el => 
+                    const otherParts = fullBlockElements.filter(el =>
                         el !== blockStartElement && el !== mainDef && !subDefs.includes(el)
                     );
-                    
+
                     nodesToMove.push(mainDef);        // 主释义
                     nodesToMove.push(...subDefs);     // 子释义（target优先）
                     nodesToMove.push(...otherParts);  // 其他元素
@@ -187,7 +187,7 @@ function pinByUnderline() {
                     const targetIndex = fullBlockElements.indexOf(targetDef);
                     const beforeTarget = fullBlockElements.slice(1, targetIndex);
                     const afterTarget = fullBlockElements.slice(targetIndex + 1);
-                    
+
                     nodesToMove.push(...beforeTarget);
                     nodesToMove.push(targetDef);
                     nodesToMove.push(...afterTarget);
@@ -267,10 +267,10 @@ function pinByUnderline() {
                     const targetIndex = fullBlockElements.indexOf(targetDef);
                     const beforeTarget = fullBlockElements.slice(1, targetIndex);
                     const afterTarget = fullBlockElements.slice(targetIndex + 1);
-                    
+
                     const beforeTargetWithoutNum = beforeTarget.filter(el => !hasNum(el));
                     const beforeTargetWithNum = beforeTarget.filter(el => hasNum(el));
-                    
+
                     nodesToMove.push(...beforeTargetWithoutNum);
                     nodesToMove.push(targetDef);
                     nodesToMove.push(...beforeTargetWithNum);
@@ -286,45 +286,45 @@ function pinByUnderline() {
             // 策略：将blockStartElement及其所有子释义（连续的无.num的def1）作为一个整体
             const mainDef = blockStartElement;  // 主释义（有.num）
             const targetIndex = fullBlockElements.indexOf(targetDef);
-            
+
             // 找到主释义后面连续的所有无.num的def1（包括target）
             const mainDefIndex = fullBlockElements.indexOf(mainDef);
             const subDefs = collectSubDefs(mainDefIndex, fullBlockElements);
-            
+
             // 将target移到subDefs的最前面
             prioritizeTarget(targetDef, subDefs);
-            
+
             // 其他元素（不包括主释义和子释义）
-            const otherParts = fullBlockElements.filter(el => 
+            const otherParts = fullBlockElements.filter(el =>
                 el !== mainDef && !subDefs.includes(el)
             );
-            
+
             nodesToMove.push(mainDef);        // 主释义在最前
             nodesToMove.push(...subDefs);     // 子释义紧跟主释义（target在最前）
             nodesToMove.push(...otherParts);  // 其他元素排在最后
         } else {
             // Target有.num，按原来的逻辑处理
-            const otherParts = fullBlockElements.filter(el => 
+            const otherParts = fullBlockElements.filter(el =>
                 el !== blockStartElement && el !== targetDef
             );
-            
+
             nodesToMove.push(blockStartElement);  // 块起点在最前
             nodesToMove.push(targetDef);          // 目标紧跟块起点
             nodesToMove.push(...otherParts);      // 其他元素排在最后
         }
     }
-    
+
     // --- 4. 执行 DOM 操作 ---
 
     // 4a. 高亮目标
     // 检测是否为夜间模式
     const htmlElement = document.documentElement;
     const isNightMode = htmlElement.classList.contains('night-mode');
-    
+
     // 根据模式选择高亮颜色
     const highlightColor = isNightMode ? '#000000' : '#fff2a8';
     targetDef.style.backgroundColor = highlightColor;
-    
+
     // 4b. 找到正确的插入点并移动
     // 关键修正：插入点是第一个"真正的"释义块的起点
     let insertionPoint = null;
