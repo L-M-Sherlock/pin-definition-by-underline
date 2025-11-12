@@ -97,6 +97,102 @@ function testCase(inputFile, outputDir) {
         // 获取处理后的HTML
         const resultHtml = container.innerHTML;
         
+        // ===== 验证逻辑 =====
+        // 查找带下划线的元素
+        const underlinedElement = container.querySelector('u');
+        if (underlinedElement) {
+            // 验证1: 确保带下划线的元素对应的 def1 被高亮
+            const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
+            if (!targetDef) {
+                throw new Error(`验证失败: 找不到带下划线元素的 def1 容器`);
+            }
+            
+            if (!targetDef.style.backgroundColor || targetDef.style.backgroundColor === '') {
+                throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
+            }
+            
+            // 验证2: 确保目标释义被置顶到正确位置
+            // 找到目标所在的 def0 分组
+            const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
+            if (!entryContainer) {
+                throw new Error(`验证失败: 找不到 mjrhsjcd-entry 容器`);
+            }
+            
+            // 查找目标释义所属的 def0 块
+            let targetDef0 = null;
+            let current = targetDef.previousElementSibling;
+            while (current) {
+                if (current.matches && current.matches('div[data-sc-class="def0"]')) {
+                    targetDef0 = current;
+                    break;
+                }
+                current = current.previousElementSibling;
+            }
+            
+            if (targetDef0) {
+                // 检查目标释义本身是否有编号
+                const targetHasNum = targetDef.querySelector('span[data-sc-class="num"]') ||
+                                   targetDef.querySelector('span[data-sc-class="num_circle"]') ||
+                                   targetDef.querySelector('div[data-sc-class="num"]') ||
+                                   targetDef.querySelector('div[data-sc-class="num_circle"]');
+                
+                if (targetHasNum) {
+                    // 如果目标有编号，它应该是 def0 后的第一个带编号的 def1
+                    let firstNumDef = targetDef0.nextElementSibling;
+                    while (firstNumDef) {
+                        if (firstNumDef.matches && firstNumDef.matches('div[data-sc-class="def1"]')) {
+                            const hasNum = firstNumDef.querySelector('span[data-sc-class="num"]') ||
+                                         firstNumDef.querySelector('span[data-sc-class="num_circle"]') ||
+                                         firstNumDef.querySelector('div[data-sc-class="num"]') ||
+                                         firstNumDef.querySelector('div[data-sc-class="num_circle"]');
+                            if (hasNum) {
+                                // 找到第一个带编号的 def1
+                                if (firstNumDef !== targetDef) {
+                                    throw new Error(`验证失败: 目标释义未被置顶。第一个带编号的 def1 不是目标释义。`);
+                                }
+                                break;
+                            }
+                        }
+                        firstNumDef = firstNumDef.nextElementSibling;
+                    }
+                } else {
+                    // 如果目标没有编号（是子释义），验证它在其主释义的子释义中排第一
+                    // 找到前面最近的带编号的 def1（主释义）
+                    let mainDef = null;
+                    current = targetDef.previousElementSibling;
+                    while (current) {
+                        if (current.matches && current.matches('div[data-sc-class="def1"]')) {
+                            const hasNum = current.querySelector('span[data-sc-class="num"]') ||
+                                         current.querySelector('span[data-sc-class="num_circle"]') ||
+                                         current.querySelector('div[data-sc-class="num"]') ||
+                                         current.querySelector('div[data-sc-class="num_circle"]');
+                            if (hasNum) {
+                                mainDef = current;
+                                break;
+                            }
+                        }
+                        current = current.previousElementSibling;
+                    }
+                    
+                    if (mainDef) {
+                        // 检查目标是否是主释义后的第一个无编号 def1
+                        let firstSubDef = mainDef.nextElementSibling;
+                        if (firstSubDef && firstSubDef.matches && firstSubDef.matches('div[data-sc-class="def1"]')) {
+                            const hasNum = firstSubDef.querySelector('span[data-sc-class="num"]') ||
+                                         firstSubDef.querySelector('span[data-sc-class="num_circle"]') ||
+                                         firstSubDef.querySelector('div[data-sc-class="num"]') ||
+                                         firstSubDef.querySelector('div[data-sc-class="num_circle"]');
+                            if (!hasNum && firstSubDef !== targetDef) {
+                                throw new Error(`验证失败: 目标子释义未被置顶到主释义后的第一位。`);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            console.log(`✓ 验证通过: 目标释义已正确高亮和置顶`);
+        }
+        
         // 保存输出
         const outputFile = inputFile;
         const outputPath = path.join(outputDir, outputFile);
