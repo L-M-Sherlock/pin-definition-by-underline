@@ -103,23 +103,34 @@ run_tests() {
     print_message $BLUE "🚀 开始运行测试..."
     echo
     
-    # 运行测试
+    # 运行测试并返回结果
     if node "$TEST_FILE"; then
         echo
         print_message $GREEN "🎉 所有测试通过！"
+        return 0
     else
+        echo
         print_message $RED "❌ 测试失败"
-        exit 1
+        return 1
     fi
 }
 
 # 生成测试报告
 generate_report() {
+    local test_status=$1  # 接收测试状态参数: "passed" 或 "failed"
     print_message $BLUE "📊 生成测试报告..."
     
     local report_file="test-report.md"
     local case_count=$(find "$CASES_DIR" -name "*.html" | wc -l)
     local output_count=$(find "$OUTPUT_DIR" -name "*.html" 2>/dev/null | wc -l)
+    
+    # 根据测试状态设置不同的显示文本
+    local status_text
+    if [ "$test_status" = "passed" ]; then
+        status_text="✅ **测试状态**: 全部通过"
+    else
+        status_text="❌ **测试状态**: 存在失败"
+    fi
     
     cat > "$report_file" << EOF
 # 测试报告
@@ -129,7 +140,7 @@ generate_report() {
 
 ## 测试结果
 
-- ✅ **测试状态**: 全部通过
+- $status_text
 - 📁 **测试用例**: $case_count 个
 - 📄 **输出文件**: $output_count 个
 - 📂 **输出目录**: $OUTPUT_DIR/
@@ -258,7 +269,7 @@ main() {
     
     # 只生成报告
     if [ "$report_only" = true ]; then
-        generate_report
+        generate_report "passed"  # 默认假设通过，因为无法判断
         exit 0
     fi
     
@@ -266,14 +277,24 @@ main() {
     print_title
     check_dependencies
     check_test_files
-    run_tests
-    generate_report
     
-    echo
-    print_message $GREEN "🎉 测试完成！"
-    print_message $CYAN "📁 查看输出: $OUTPUT_DIR/"
-    print_message $CYAN "📊 查看报告: test-report.md"
-    echo
+    # 运行测试并捕获结果
+    if run_tests; then
+        generate_report "passed"
+        echo
+        print_message $GREEN "🎉 测试完成！"
+        print_message $CYAN "📁 查看输出: $OUTPUT_DIR/"
+        print_message $CYAN "📊 查看报告: test-report.md"
+        echo
+    else
+        generate_report "failed"
+        echo
+        print_message $RED "❌ 测试失败！"
+        print_message $CYAN "📁 查看输出: $OUTPUT_DIR/"
+        print_message $CYAN "📊 查看报告: test-report.md"
+        echo
+        exit 1
+    fi
 }
 
 # 运行主函数

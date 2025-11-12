@@ -227,8 +227,10 @@ function runAllTests() {
     
     if (failed === 0) {
         console.log('\n🎉 所有测试通过！');
+        process.exit(0);
     } else {
         console.log('\n⚠️  有测试失败，请检查输出文件');
+        process.exit(1);
     }
 }
 

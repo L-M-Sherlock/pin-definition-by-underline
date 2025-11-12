@@ -1,7 +1,11 @@
 function pinByUnderline() {
     // 工具函数
     function hasNum(element) {
-        return element.matches('div[data-sc-class="def1"]') && element.querySelector('span[data-sc-class="num"]');
+        return element.matches('div[data-sc-class="def1"]') &&
+            (element.querySelector('span[data-sc-class="num"]') ||
+                element.querySelector('span[data-sc-class="num_circle"]') ||
+                element.querySelector('div[data-sc-class="num"]') ||
+                element.querySelector('div[data-sc-class="num_circle"]'));
     }
 
     function isDef0(element) {
