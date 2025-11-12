@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Test Output - 撮る.html</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .test-info {
+        background: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+
+      .highlight {
+        background-color: #fff2a8 !important;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+        margin-left: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+        color: orangered;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+        font-size: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+        color: dodgerblue;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+        color: darkgreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+        color: limegreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+        color: darkred;
+        font-weight: bold;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+        margin-left: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="phrase"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="phrase"] {
+        font-weight: bold;
+        font-size: 1.3em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+        color: orangered;
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+        font-size: 1em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+        font-size: 1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2"] {
+        font-size: 1em;
+        padding-left: 0em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2_first"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2_first"] {
+        font-size: 1em;
+        padding-left: 0em;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+        color: dodgerblue;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exam"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exam"] {
+        padding-left: 0em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+        color: darkgreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+        color: limegreen;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="sanjiao"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="sanjiao"] {
+        color: indigo;
+        background-color: yellow;
+        font-size: 1em;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="canzhao"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="canzhao"] {
+        color: indigo;
+        font-size: 1em;
+        background-color: yellow;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="fanyi"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="fanyi"] {
+        color: indigo;
+        font-size: 1em;
+        background-color: yellow;
+        font-weight: bold;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="lingxing"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="lingxing"] {
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="square"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="square"] {
+        color: darkturquoise;
+        font-weight: bold;
+        font-size: 1.3em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoxian"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoxian"] {
+        color: indigo;
+        font-size: 0.9em;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoji"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoji"] {
+        color: yellow;
+        font-size: 0.9em;
+        background-color: indigo;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="jiu"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="jiu"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="paisheng"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="paisheng"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="keneng"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="keneng"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yixing"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yixing"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="wen"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="wen"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="ming"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="ming"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="zhuyi"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="zhuyi"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dong"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dong"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="shu"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="shu"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yufa"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yufa"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yuyuan"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yuyuan"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+        margin-right: 0.2em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+        color: darkred;
+        font-weight: bold;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num_circle"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num_circle"] {
+        color: darkred;
+        font-weight: bold;
+        border-width: 0.15em;
+        border-style: solid;
+        border-color: darkred;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        text-align: center;
+        vertical-align: middle;
+        margin-left: -1em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakikata"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakikata"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="tsukaikata"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="tsukaikata"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yomiwake"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yomiwake"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakiwake"],
+      .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakiwake"] {
+        color: indigo;
+        background-color: yellow;
+        font-weight: bold;
+        border-width: 0.1em;
+        border-style: solid;
+        border-color: indigo;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="test-info">
+      <h2>🧪 测试结果: 撮る.html</h2>
+      <p><strong>输入文件:</strong> cases/撮る.html</p>
+      <p><strong>说明:</strong> 黄色背景表示被置顶的目标释义</p>
+    </div>
+
+    <div class="yomitan-glossary">
+      <div style="text-align: left;"
+        class="yomitan-glossary">
+        <ol>
+          <li data-dictionary="明鏡日汉双解辞典"><i>(明鏡日汉双解辞典)</i> <span>
+              <div data-sc-class="mjrhsjcd-entry">
+                <div data-sc-class="head"><span data-sc-class="word"
+                    lang="ja">と・る［取る・採る・捕る・執る・撮る］</span></div>
+                <div data-sc-class="def0"
+                  lang="ja">（一）<span data-sc-class="type"
+                    lang="ja">⟨他五⟩</span></div>
+                <div data-sc-class="def1"
+                  style="background-color: rgb(255, 242, 168);"><span data-sc-class="num_circle"><u>58</u> </span><span data-sc-class="def2"
+                    lang="ja">〖撮〗<span lang="ja">カメラで被写体を写すことによって、写真作品を作り出す。撮影する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 拍摄。用照相机拍摄被摄体，以创作出摄影作品。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">野生動物の写真［映画］を～</span>」<span data-sc-class="excn"
+                      lang="zh">拍摄野生动物的照片［电影］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">胸のレントゲンを～</span>」<span data-sc-class="excn"
+                      lang="zh">拍胸部的X射线照片</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>「〈被写体〉の写真を～」と「〈被写体〉を写真に～」の言い方がある。前者は～ヲに〈結果〉を、後者は〈対象〉をとる言い方。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">① </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">離れているものを手でつかんで持つ。手にする。特に、手でつかんで自分の領域におさめる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 拿。取。把东西抓在手里。拿在手里。尤指抓在手里置于自己的领域内。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">箸を手に～</span>」<span data-sc-class="excn"
+                      lang="zh">把筷子拿在手里</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">そこの新聞を～・ってくれ</span>」<span data-sc-class="excn"
+                      lang="zh">请把那里的报纸拿过来</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">忘れ物を～・りに帰る</span>」<span data-sc-class="excn"
+                      lang="zh">回去取遗忘的东西</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">～物もとりあえず（＝わが身一つで）避難する</span>」<span data-sc-class="excn"
+                      lang="zh">匆匆忙忙地（＝什么都顾不得地）避难</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>もと「執る」とも。今は多く「取る」を使う。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">② </span><span data-sc-class="def2"
+                    lang="ja">〖執・取〗<span lang="ja">道具を手に持ち、それを使って独自の作業をする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （用手）操纵。把工具拿在手里。使用工具进行独立作业。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">武器を～・って戦う</span>」<span data-sc-class="excn"
+                      lang="zh">拿起武器战斗</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">鋤［手綱・舵］を～</span>」<span data-sc-class="excn"
+                      lang="zh">握锄［缰绳・掌舵］</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈道具〉をとる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">③ </span><span data-sc-class="def2"
+                    lang="ja">〖執・取〗<span lang="ja">ことの事情をしっかりとつかんでその仕事をする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 执行，进行。牢牢地掌握事情的状况进行该项工作。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">事務［指揮］を～</span>」<span data-sc-class="excn"
+                      lang="zh">办公［指挥］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">仲介の労を～</span>」<span data-sc-class="excn"
+                      lang="zh">居间调停</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">④ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">権利・許可や資格などを手に入れる。特に、予約してその権利を確保する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 获得，取得。把利益、许可、资格等搞到手。特指经事先预约确保其权利。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">市民権［主導権］を～</span>」<span data-sc-class="excn"
+                      lang="zh">获得市民权［主导权］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">許可［アポ］を～</span>」<span data-sc-class="excn"
+                      lang="zh">获得批准［约定见面时间］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">運転免許を～</span>」<span data-sc-class="excn"
+                      lang="zh">取得驾驶执照</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">ホテルの予約［指定席］を～</span>」<span data-sc-class="excn"
+                      lang="zh">订好饭店［指定席位］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑤ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">与えられた権利を行使して、仕事を休んだり試合を中断したりする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 获得。行使被赋予的权利，休假或中断比赛。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">有給休暇［作戦タイム］を～</span>」<span data-sc-class="excn"
+                      lang="zh">获得带薪休假［比赛暂停时间］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑥ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">質物・人質を手元に確保する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 拿。抓。把抵押物或人质控制在手中。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">人質を～・って立てこもる</span>」<span data-sc-class="excn"
+                      lang="zh">挟持人质闭门不出</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈結果〉をとる。「指輪［社長］を質［人質］に～」のように、～ヲに〈対象〉をとる言い方もできる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑦ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">証明書などを発行させて自分の手に収める。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 取得。使发放证明书等并将其收在自己手中。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">市役所から住民票を～</span>」<span data-sc-class="excn"
+                      lang="zh">从市政府取得居民卡</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">始末書を～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">被告知提交书面检查</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑧ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">証言・約言などを手に入れる。取り付ける。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 取得（证词等）。取得证词、诺言等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">言質［確約］を～</span>」<span data-sc-class="excn"
+                      lang="zh">取得诺言［保证］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑨ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">得点や評価などを勝ち得る。また、地位や権力や領土などを手に入れる。獲得する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 获得。夺取。得分、赢得评价等。也指获取地位、权力、领土等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">先取点［金メダル］を～</span>」<span data-sc-class="excn"
+                      lang="zh">先得分［获得金牌］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">観客から笑いを～</span>」<span data-sc-class="excn"
+                      lang="zh">赢得观众的笑声</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">シェアの六割を～</span>」<span data-sc-class="excn"
+                      lang="zh">获得六成市场份额</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">政権［敵の陣地］を～</span>」<span data-sc-class="excn"
+                      lang="zh">夺取政权［敌人阵地］</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>獲得する意で「<span style="vertical-align: super;">▿</span>獲る」、奪い取る意で「<span style="vertical-align: super;">▿</span>盗る」「<span style="vertical-align: super;">▿</span>奪る」などと書いて、意味を強めることもできる。</span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">天下を獲る</span>」<span data-sc-class="excn"
+                      lang="zh">ⓚ夺得天下</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">国を盗る</span>」<span data-sc-class="excn"
+                      lang="zh">ⓚ窃国</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">タイトルを奪る</span>」<span data-sc-class="excn"
+                      lang="zh">ⓚ夺取冕冠</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑩ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">届けてもらう約束で買う。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 订购。预订并要求将贷送达。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">昼食に出前を～</span>」<span data-sc-class="excn"
+                      lang="zh">午饭订了外卖</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">新聞を～</span>」<span data-sc-class="excn"
+                      lang="zh">订报</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑪ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">受け納めて自分のものとする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 收取。接纳为自己的东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">国民から税金を～</span>」<span data-sc-class="excn"
+                      lang="zh">向国民征收税金</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">会費を～</span>」<span data-sc-class="excn"
+                      lang="zh">收取会费</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑫ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">人のものを不当な手段で自分の所有物にする。奪う。盗む。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 抢，偷。通过不正当手段将他人之物占为己有。夺。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">人の物［財布］を～</span>」<span data-sc-class="excn"
+                      lang="zh">抢别人的东西［偷人钱包］</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>「<span style="vertical-align: super;">▿</span>盗る」「<span style="vertical-align: super;">▿</span>奪る」とも。</span><br><span lang="ja"><span data-sc-class="biaoxian"
+                      lang="ja">表現</span>マイナスに評価していう。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑬ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">戦って相手の大切な物を奪う。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 夺取。通过战斗抢夺对方的重要之物。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">三振を～</span>」<span data-sc-class="excn"
+                      lang="zh">使对手三击不中出局</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">『技あり』で、一本～</span>」<span data-sc-class="excn"
+                      lang="zh">因为“用招儿”了，得1分</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">敵将の首を～</span>」<span data-sc-class="excn"
+                      lang="zh">取了敌将的首级</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">敵を～</span>」<span data-sc-class="excn"
+                      lang="zh">复仇</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑭ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">権力で召し上げる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 征收。使用权力没收。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">わが子を兵隊に～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">我的孩子被征兵了</span></span><br><span><span data-sc-class="sanjiao">▶</span><span lang="ja">受身で使うことが多い。</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑮ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">食物や養分を体内に受け入れて自分のものにする。取り入れる。摂取する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 摄取。把食物、养分摄入体内成为自己的东西。摄入。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">栄養を～</span>」<span data-sc-class="excn"
+                      lang="zh">摄取营养</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">パンと牛乳で朝食を～</span>」<span data-sc-class="excn"
+                      lang="zh">早饭吃面包、牛奶</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>「<span style="vertical-align: super;">▿</span>摂る」とも。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑯ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">みずからに受け入れる行為としてそのことをする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 获取。作为动作者自己接受的行为来做该事。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">睡眠［休み］を～</span>」<span data-sc-class="excn"
+                      lang="zh">睡觉［休息］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">暖を～（＝暖まる）</span>」<span data-sc-class="excn"
+                      lang="zh">取暖</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑰ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">売買の約束などをしっかりと成立させる。取り結ぶ。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 缔结。使买卖合同等坚固地成立。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">ウエイターが注文を～・りに来る</span>」<span data-sc-class="excn"
+                      lang="zh">服务生来（让我们）点菜</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">売買契約を～</span>」<span data-sc-class="excn"
+                      lang="zh">缔结买卖合同</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑱ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">よくない結果を招く。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 造成。招致不好的结果。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">経済面で後れを～</span>」<span data-sc-class="excn"
+                      lang="zh">在经济方面落后</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">語学では誰にもひけを～・らない</span>」<span data-sc-class="excn"
+                      lang="zh">在语言学上不逊于任何人</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">不覚を～</span>」<span data-sc-class="excn"
+                      lang="zh">因疏忽导致失败</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑲ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">自分のこととして引き受ける。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 承担。作为自己的责任承担下来。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">辞職して責任を～</span>」<span data-sc-class="excn"
+                      lang="zh">以辞职来承担责任</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">家の跡を～</span>」<span data-sc-class="excn"
+                      lang="zh">继承家业</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">⑳ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「年を～」の形で》年齢を加える。また、高齢になる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“年を～”的形式）年龄增加。也指上岁数。上年纪。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">人は一年ごとに年を～</span>」<span data-sc-class="excn"
+                      lang="zh">人的岁数一年一年地长</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">年を～と視力が弱る</span>」<span data-sc-class="excn"
+                      lang="zh">上了年纪视力就衰退</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉑ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">遊女や芸者が客を迎えて相手をする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （妓女等）接客。妓女、艺妓迎接、接待客人。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">客を～</span>」<span data-sc-class="excn"
+                      lang="zh">接客</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉒ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">数えはかって数量を明らかにする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 计数，测量。计算、搞清数量。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">寸法［統計・脈］を～</span>」<span data-sc-class="excn"
+                      lang="zh">量尺寸［进行统计・测脉搏］</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈結果〉をとる。「人口の推移を統計に～」のように、～ヲに〈対象〉をとる言い方もできる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉓ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">照らし合わせて情報の確かさを確認する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 核对确认。经核对，确认情报的正确性。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">本人の確認［証言の裏］を～</span>」<span data-sc-class="excn"
+                      lang="zh">确认是否是本人［核实证词］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">出席を～</span>」<span data-sc-class="excn"
+                      lang="zh">点名</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉔ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">音楽に合わせて規則的な動きを作り出す。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 打（拍子）。配合着音乐做出规律性的动作。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">手で調子を～</span>」<span data-sc-class="excn"
+                      lang="zh">用手打拍子</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">体を揺すってリズムを～</span>」<span data-sc-class="excn"
+                      lang="zh">合着音乐的节奏摇晃着身体</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉕ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">ある一定の状態や姿勢・態度などを作り出す。保つ。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采取，保持。做出一定的状态、姿势、态度等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">バランスを～</span>」<span data-sc-class="excn"
+                      lang="zh">保持平衡</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">警戒態勢を～</span>」<span data-sc-class="excn"
+                      lang="zh">保持警戒状态</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">あいまいな態度［中立の立場］を～</span>」<span data-sc-class="excn"
+                      lang="zh">采取暧昧的态度［中立的立场］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉖ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">そういう姿勢・構造・形式や制度などを有する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采取。拥有该种姿势、构造、形式、态度等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">第一楽章はソナタ形式を～</span>」<span data-sc-class="excn"
+                      lang="zh">第一乐章采取奏鸣曲的形式</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">この小説は複雑な構成を～</span>」<span data-sc-class="excn"
+                      lang="zh">这篇小说有复杂的结构</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">会議は非公開の形を～</span>」<span data-sc-class="excn"
+                      lang="zh">会议采取非公开的形式</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉗ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">文法で、文が構文上そういう性質をもった語句を要求する。…がくる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 要求。语法上，句子在结构上要求有该种性质的语句。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">主語に抽象名詞を～</span>」<span data-sc-class="excn"
+                      lang="zh">（这里）主语要求是抽象名词</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉘ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">ある表現や現象を一定の意味に解釈する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 理解。解释为。将某种表现、现象解释为一定的意思。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">せっかくの好意を悪く～</span>」<span data-sc-class="excn"
+                      lang="zh">把别人的一番好意当作恶意</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">質問の内容を逆の意味に～</span>」<span data-sc-class="excn"
+                      lang="zh">把提问的内容理解反了</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉙ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">スポーツで、審判がプレーの正否を判定する。また、反則や罰則を宣言する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 裁定。判定。体育比赛中，裁判裁定比赛的正当与否。也指宣布犯规或判罚规则。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">きわどい交錯プレーをアウトと～</span>」<span data-sc-class="excn"
+                      lang="zh">把一次危险的碰撞判为犯规</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">オフサイド［ペナルティー］を～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">被判越位［罚球］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉚ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">こちらの情報が先方に伝わるようにする。連絡をつける。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 取得联系。将这边的信息传达给对方。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">電話で本部と連絡を～</span>」<span data-sc-class="excn"
+                      lang="zh">通过电话和本部联系</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉛ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">原形に従って同じ型や形状のものを作り出す。起こす。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 拓取。按照原型创作型号、形状相同的东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">石膏で型を～</span>」<span data-sc-class="excn"
+                      lang="zh">用石膏做模子</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">拓本［コピー］を～</span>」<span data-sc-class="excn"
+                      lang="zh">取拓本［复印材料］</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈結果〉をとる。「書類をコピーに～」のように、～ヲに〈対象〉をとる言い方もできる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉜ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">筆やペンを執ることによって、記録などを作り出す。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 记录。拿起毛笔、钢笔进行记录等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">メモを～</span>」<span data-sc-class="excn"
+                      lang="zh">做笔记</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈結果〉をとる。「子供の成長を記録に～」のように、～ヲに〈対象〉をとる言い方もできる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉝ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">書き付けることによって、書類上の処理をする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 办理（手续等）。通过书写来进行文件上的处理。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">入会の手続きを～</span>」<span data-sc-class="excn"
+                      lang="zh">办理入会手续</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉞ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">その遊びや動作・競技を成立させる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 做（动作）。做游戏、动作，进行比赛。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">カルタ［相撲］を～</span>」<span data-sc-class="excn"
+                      lang="zh">玩纸牌［相扑］</span></span><br><span><span data-sc-class="sanjiao">▶</span><span lang="ja">手札や回しを取ることから。</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㉟ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">寝具を敷きのべて寝床を作る。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 铺（床）。铺开被褥备好床铺。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">床を～</span>」<span data-sc-class="excn"
+                      lang="zh">铺床</span></span><br><span><span data-sc-class="sanjiao">▶</span><span lang="ja">敷くための場所として取る（＝確保する）ことから。</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊱ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「機嫌を～」の形で》人の気に入るように働きかける。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“機嫌を～”的形式）做工作以讨人欢心。讨好。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">猫なで声で機嫌を～</span>」<span data-sc-class="excn"
+                      lang="zh">用柔媚的声调来讨好</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊲ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「大事を～」の形で》大事に至らぬように慎重に物事に対処する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“大事を～”的形式）为不釀成大事而慎重地处理事物。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">大事を～・ってもう一日休む</span>」<span data-sc-class="excn"
+                      lang="zh">为了慎重再休息一天</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊳ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「手玉に～」の形で》思うがままにあやつる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“手玉に～”的形式）随心所欲地操纵。随意摆弄。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">強力打線を手玉に～</span>」<span data-sc-class="excn"
+                      lang="zh">把对方强有力的击球手阵容像玩偶似地随意摆布</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊴ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「気を～・られる」などの形で》他のことにかまけて本来の注意力を奪われる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“気を～・られる”等的形式）只顾做其他的事情以至原本的注意力被分散。被……所吸引。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">隣の人に気を～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">被旁边的人吸引了注意力</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊵ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">《「足［ハンドル］を～・られる」の形で》歩行［ハンドルさばき］の自由を奪われる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“足［ハンドル］を～・られる”的形式）被…绊住脚。被剥夺了行走的自由［方向盘操纵失灵］。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">ぬかるみに足を～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">因泥泞走不了路</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">雪道にハンドルを～・られる</span>」<span data-sc-class="excn"
+                      lang="zh">在雪路上方向盘不灵</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊶ </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">その（方向への）進路を選ぶ。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 选择。选择（朝着该方向的）前进道路。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">海路を～</span>」<span data-sc-class="excn"
+                      lang="zh">选择海路</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">飛行機が北西に針路を～</span>」<span data-sc-class="excn"
+                      lang="zh">飞机选择西北方向的航路</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊷ </span><span data-sc-class="def2"
+                    lang="ja">〖取・採〗<span lang="ja">いくつかの中から選択する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 选取。从几个之中选择。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">進学を～か就職を～かで迷っている</span>」<span data-sc-class="excn"
+                      lang="zh">是升学还是就业拿不定主意</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">第二外国語に中国語を～</span>」<span data-sc-class="excn"
+                      lang="zh">选择中文作为第二外语</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">対立する意見の中間を～</span>」<span data-sc-class="excn"
+                      lang="zh">选择对立意见的折中立场</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊸ </span><span data-sc-class="def2"
+                    lang="ja">〖取・採〗<span lang="ja">手本やよりどころを求めて選び定める。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 选定。寻求、选择样板或依据。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">韓国に範を～・って制度を改める</span>」<span data-sc-class="excn"
+                      lang="zh">选定韩国为样板进行制度改革</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">民話から題材を～</span>」<span data-sc-class="excn"
+                      lang="zh">从民间传说中选定题材</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊹ </span><span data-sc-class="def2"
+                    lang="ja">〖取・採〗<span lang="ja">その役割を持った人を迎え入れる。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 接纳。接收起到该种作用的人。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">本家が婿［養子］を～</span>」<span data-sc-class="excn"
+                      lang="zh">本家招婿［收养子］</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>～ヲに〈結果〉をとる。「師匠が太郎を弟子に～」のように、～ヲに〈対象〉をとる言い方もできる。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊺ </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">材料や原料から必要なものを取り出したり作り出したりする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 提取。从材料、原料中提取或造出需要的东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">アコヤ貝から真珠を～</span>」<span data-sc-class="excn"
+                      lang="zh">从珍珠贝中提取珍珠</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">菜種から油を～</span>」<span data-sc-class="excn"
+                      lang="zh">用菜籽榨油</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">芋からアルコールを～</span>」<span data-sc-class="excn"
+                      lang="zh">从薯类中提取酒精</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊻ </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">人材を採用する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 录用。采用人才。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">新卒を数名～</span>」<span data-sc-class="excn"
+                      lang="zh">录用几名应届毕业生</span></span><br><span lang="ja"><span data-sc-class="yufa"
+                      lang="ja">語法</span>「経験者／外交員 を～」では、前者は～ヲに〈資格者〉を、後者は〈役割者〉をとる例。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊼ </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">有効な手段や考え方として選び定める。採用する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采取。选定其为有效的手段或想法。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">積極策［適切な処置・内部犯行説］を～</span>」<span data-sc-class="excn"
+                      lang="zh">采取积极的对策［恰当的处理・内部作案说］</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊽ </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">必要なものを選んで手に入れる。採取する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采，取。选取所需的东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">井戸水からサンプルを～</span>」<span data-sc-class="excn"
+                      lang="zh">从井水中取样</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">犯行現場から指紋を～</span>」<span data-sc-class="excn"
+                      lang="zh">从作案现场采指纹</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">テープの音を楽譜に～</span>」<span data-sc-class="excn"
+                      lang="zh">把磁带上的声音采集到乐谱上</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊾ </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">室内に明かりを導き入れる。採光する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采光。将亮光导入室内。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">窓から外光を～</span>」<span data-sc-class="excn"
+                      lang="zh">从窗户采光</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">㊿ </span><span data-sc-class="def2"
+                    lang="ja">〖採〗<span lang="ja">議案の賛否の数を調べて可否を決める。採決する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 表决。通过调查赞成与反对的票数来决定议案的可否。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">決［可否］を～</span>」<span data-sc-class="excn"
+                      lang="zh">表决</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">51 </span><span data-sc-class="def2"
+                    lang="ja">〖捕・取〗<span lang="ja">ある目的をもって動物をつかまえる。捕獲する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 捕获。以某种目的捕获动物。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">海に潜ってアワビを～</span>」<span data-sc-class="excn"
+                      lang="zh">潜入海底捕鲍鱼</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">猫がネズミを～</span>」<span data-sc-class="excn"
+                      lang="zh">猫捉老鼠</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>⑴「捕」は逃げるものを追いかけてつかまえるといった意味合い。⑵「<span style="vertical-align: super;">▿</span>獲る」とも。貝類では「採」が多い。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">52 </span><span data-sc-class="def2"
+                    lang="ja">〖採・取〗<span lang="ja">昆虫や山菜・薬草・鉱物などを採取する。採集する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 采集。采集昆虫、野菜、药草、矿物等。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">チョウを～</span>」<span data-sc-class="excn"
+                      lang="zh">捉蝴蝶</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">キノコを～・って暮らしを立てる</span>」<span data-sc-class="excn"
+                      lang="zh">采蘑菇谋生</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">川で砂金を～</span>」<span data-sc-class="excn"
+                      lang="zh">在河边采沙金</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">53 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">作物を収穫する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 收获。收获农作物。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">トマトを～</span>」<span data-sc-class="excn"
+                      lang="zh">收获西红柿</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>「<span style="vertical-align: super;">▿</span>穫る」とも。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">54 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">余分なものや不要なものを取り除く。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 除去。去除多余的、不需要的东西。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">雑草［野菜の灰汁・肉の臭み］を～</span>」<span data-sc-class="excn"
+                      lang="zh">除去杂草［蔬菜中的涩味・肉的腥味］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">手術で胃のポリープを～</span>」<span data-sc-class="excn"
+                      lang="zh">做手术除去胃中息肉</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">鎮痛剤で痛みを～</span>」<span data-sc-class="excn"
+                      lang="zh">用镇痛剂去痛</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">55 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">身につけた物を取りはずす。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 摘下。脱掉。除去穿在身上的衣物。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">帽子を～・って挨拶する</span>」<span data-sc-class="excn"
+                      lang="zh">摘下帽子问候</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">おむつを～</span>」<span data-sc-class="excn"
+                      lang="zh">除去尿布</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">56 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">必要と思われる時間や空間をしっかりと確保する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 确保（时间、空间）。确保被认为是必要的时间、空间。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">十分に時間を～・って検討する</span>」<span data-sc-class="excn"
+                      lang="zh">确保充分的时间进行商量</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">適度の間合い［距離］を～</span>」<span data-sc-class="excn"
+                      lang="zh">保持适当的空间［距离］</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">新しい設計では居間を広く～・ってある</span>」<span data-sc-class="excn"
+                      lang="zh">新的设计确保了起居室的足够空间</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">57 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">時間や空間を普通より余分に必要とする。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 占（时间、空间）。与通常情况相比需要更多的时间、空间。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">素案の作成が予定より時間を～・ってしまった</span>」<span data-sc-class="excn"
+                      lang="zh">制定草案比预想的花费了更多的时间</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">手間を～・らせる取材はお断りだ</span>」<span data-sc-class="excn"
+                      lang="zh">占用大量时间的采访我不接受</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">下準備に時間を～・られる（＝食われる・割かれる・奪われる）</span>」<span data-sc-class="excn"
+                      lang="zh">事先的准备占用时间</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">この冷蔵庫は場所を～（＝ふさぐ・占める・食う）</span>」<span data-sc-class="excn"
+                      lang="zh">这个冰箱占地方</span></span></div>
+                <div data-sc-class="def1"><span data-sc-class="num_circle">59 </span><span data-sc-class="def2"
+                    lang="ja">〖取〗<span lang="ja">録音する。また、録画する。</span><span data-sc-class="dfcn"
+                      lang="zh">/ 录音（像）。录音。也指录像。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">祭ばやしの音をテープに～</span>」<span data-sc-class="excn"
+                      lang="zh">把祭典时的音乐声用磁带录下来</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>「<span style="vertical-align: super;">▿</span>録る」も多い。「取る」に代わって新しく生まれた表記。</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">◯ </span><span data-sc-class="def2"><span lang="ja">〔自分の手にしっかりとおさめて支配下におく意〕</span></span></div>
+                <div data-sc-class="def0"
+                  lang="ja">（二）<span data-sc-class="type"
+                    lang="ja">⟨自五⟩</span></div>
+                <div data-sc-class="def1"><span data-sc-class="num">◯ </span><span data-sc-class="def2"><span lang="ja">《「…に～・って」の形で》…（の身）として。…（の立場）から見て。</span><span data-sc-class="dfcn"
+                      lang="zh">/ （以“…に～・って”的形式）作为……。从……（的立场）来看。对……来说。</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">初心者に～・っては難しい</span>」<span data-sc-class="excn"
+                      lang="zh">对初学者来说很难</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">世界の経済に～・っても好ましくない事態だ</span>」<span data-sc-class="excn"
+                      lang="zh">对世界经济来说也是个不能令人满意的事态</span></span><br><span lang="ja"><span data-sc-class="biaoji"
+                      lang="ja">表記</span>一般にかな書き。</span><br><span lang="ja"><span data-sc-class="biaoxian"
+                      lang="ja">表現</span>丁寧体は「とりまして」、「とっては」の口語体は「とっちゃ（あ）」となる。</span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">私に～・りまして、それは大変思い出深い旅でした</span>」<span data-sc-class="excn"
+                      lang="zh">ⓚ对我来说那是一次记忆深刻的旅行</span></span><br><span data-sc-class="exam"
+                    lang="ja"><span data-sc-class="exjp">▲ </span>「<span data-sc-class="exjp"
+                      lang="ja">彼らにとっちゃそのほうがいいんだ</span>」<span data-sc-class="excn"
+                      lang="zh">ⓚ对他们来说这样更好</span></span><br><span lang="ja"><span data-sc-class="keneng"
+                      lang="ja">可能</span>取れる</span><br><span lang="ja"><span data-sc-class="ming"
+                      lang="ja">名</span>取り</span></div>
+              </div>
+            </span></li>
+          <style>
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="mjrhsjcd-entry"] {
+              margin-left: 1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="head"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="head"] {
+              font-size: 1em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="word"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="word"] {
+              font-weight: bold;
+              font-size: 1.3em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="phrase"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="phrase"] {
+              font-weight: bold;
+              font-size: 1.3em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="type"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="type"] {
+              color: orangered;
+              font-size: 1em;
+              font-weight: bold;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def0"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def0"] {
+              font-size: 1em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def1"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def1"] {
+              font-size: 1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2"] {
+              font-size: 1em;
+              padding-left: 0em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="def2_first"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="def2_first"] {
+              font-size: 1em;
+              padding-left: 0em;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dfcn"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dfcn"] {
+              color: dodgerblue;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exam"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exam"] {
+              padding-left: 0em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="exjp"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="exjp"] {
+              color: darkgreen;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="excn"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] {
+              color: limegreen;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="sanjiao"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="sanjiao"] {
+              color: indigo;
+              background-color: yellow;
+              font-size: 1em;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="canzhao"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="canzhao"] {
+              color: indigo;
+              font-size: 1em;
+              background-color: yellow;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="fanyi"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="fanyi"] {
+              color: indigo;
+              font-size: 1em;
+              background-color: yellow;
+              font-weight: bold;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="lingxing"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="lingxing"] {
+              font-weight: bold;
+              font-size: 1.3em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="square"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="square"] {
+              color: darkturquoise;
+              font-weight: bold;
+              font-size: 1.3em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoxian"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoxian"] {
+              color: indigo;
+              font-size: 0.9em;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="biaoji"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="biaoji"] {
+              color: yellow;
+              font-size: 0.9em;
+              background-color: indigo;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="jiu"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="jiu"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="paisheng"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="paisheng"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="keneng"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="keneng"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yixing"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yixing"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="wen"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="wen"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="ming"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="ming"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="zhuyi"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="zhuyi"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="dong"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="dong"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="shu"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="shu"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yufa"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yufa"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yuyuan"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yuyuan"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+              margin-right: 0.2em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] {
+              color: darkred;
+              font-weight: bold;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num_circle"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num_circle"] {
+              color: darkred;
+              font-weight: bold;
+              border-width: 0.15em;
+              border-style: solid;
+              border-color: darkred;
+              border-radius: 50%;
+              font-size: 0.75rem;
+              text-align: center;
+              vertical-align: middle;
+              margin-left: -1em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakikata"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakikata"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="tsukaikata"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="tsukaikata"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="yomiwake"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="yomiwake"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="kakiwake"],
+            .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="kakiwake"] {
+              color: indigo;
+              background-color: yellow;
+              font-weight: bold;
+              border-width: 0.1em;
+              border-style: solid;
+              border-color: indigo;
+              border-radius: 0.33em;
+              font-size: 0.9em;
+            }
+
+          </style>
+        </ol>
+      </div>
+    </div>
+  </body>
+
+</html>
