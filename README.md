@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.12-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.13-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -18,7 +18,8 @@
 - 🔄 **智能重排** - 维护明镜词典的层级结构和语义完整性
 - 🎨 **视觉高亮** - 用黄色背景标记你关注的目标释义
 - 🚀 **自动置顶** - 将相关释义块移到卡片最顶部，提高复习效率
-- ✅ **完整测试** - 9 个测试用例覆盖明镜词典的各种复杂结构
+- ✅ **完整测试** - 11 个测试用例覆盖明镜词典的各种复杂结构
+- 🔍 **智能编号** - 支持 `num` 和 `num_circle` 两种编号类型
 - 🔧 **Lapis 兼容** - 专为 Lapis 笔记模板的 DOM 结构优化
 
 ### 📸 效果展示
@@ -209,7 +210,7 @@ pin-definition-by-underline/
 ├── CONTRIBUTING.md     # 贡献指南
 ├── package.json        # 依赖配置
 ├── .gitignore          # Git 忽略规则
-├── cases/              # 测试用例（10个）
+├── cases/              # 测试用例（11个）
 │   ├── いい加減.html
 │   ├── くれる.html
 │   ├── はずす.html
@@ -218,6 +219,7 @@ pin-definition-by-underline/
 │   ├── 一体.html
 │   ├── 代.html
 │   ├── 回転.html
+│   ├── 撮る.html        # ← 新增：num_circle 编号类型
 │   ├── 易い.html
 │   └── 載る.html
 ├── test-output/        # 测试输出（gitignore）
@@ -250,10 +252,20 @@ pin-definition-by-underline/
 | 一体 | def0块重排 | ✅ 通过 |
 | 代 | def0标记保持 | ✅ 通过 |
 | 回転 | def1块重排 | ✅ 通过 |
+| 撮る | **num_circle 编号类型** | ✅ 通过 |
 | 易い | def1子释义 | ✅ 通过 |
 | 載る | 独立块识别 | ✅ 通过 |
 
-**测试结果**：10/10 通过 ✅
+**测试结果**：11/11 通过 ✅
+
+### 测试验证
+
+测试系统包含完整的自动验证逻辑：
+- ✅ **高亮验证** - 确保目标释义被设置背景色
+- ✅ **置顶验证** - 确保目标释义在正确的位置
+  - 带编号释义 → 应该是 def0 后第一个带编号的 def1
+  - 子释义 → 应该是主释义后第一个子释义
+- ✅ **编号类型** - 同时支持 `num` 和 `num_circle` 两种编号
 
 ## 🎯 核心设计原则
 
@@ -291,7 +303,8 @@ if (targetHasNum) {
 | `.yomitan-glossary` | Yomitan 词典内容容器 | Lapis 卡片的释义区域 |
 | `div[data-sc-class="def0"]` | 块标记（词性/类别） | `（一）⟨名⟩`、`（二）⟨副⟩` |
 | `div[data-sc-class="def1"]` | 释义内容 | 主释义和子释义 |
-| `span[data-sc-class="num"]` | 释义编号 | `①`、`②`、`㋐`、`㋑` |
+| `span[data-sc-class="num"]` | 释义编号（普通） | `①`、`②`、`㋐`、`㋑` |
+| `span[data-sc-class="num_circle"]` | 释义编号（带圆圈） | `51`、`52`、`58` 等 |
 | `div[data-sc-class="mjrhsjcd-entry"]` | 明镜词条容器 | 整个词条的包装元素 |
 | `li[data-dictionary]` | 词典条目 | Anki/Lapis 的词典列表项 |
 
@@ -315,17 +328,17 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.11** (2025-10-14)
+当前版本：**v1.13** (2025-11-12)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新
+### 最新更新 (v1.13)
 
-- ✅ 完善 def0 块中子释义处理逻辑
-- ✅ 支持主释义和子释义作为整体移动
-- ✅ 添加完整的自动化测试套件
-- ✅ 10 个测试用例全部通过
-- ✅ 修复带编号目标释义时前序编号释义被拆散的问题
+- ✅ **修复** `hasNum` 函数，添加对 `num_circle` 编号类型的支持
+- ✅ **新增** 测试用例「撮る」，验证 `num_circle` 编号的正确置顶
+- ✅ **增强** 测试系统，添加自动验证逻辑（高亮检查 + 置顶检查）
+- ✅ **改进** 测试脚本，支持动态生成测试报告状态
+- ✅ 11 个测试用例全部通过，从冒烟测试升级为功能测试
 
 ## 🤝 贡献
 
