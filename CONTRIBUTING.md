@@ -11,7 +11,7 @@ pin-definition-by-underline/
 ├── README.md          # 项目介绍、Lapis集成指南、核心特性
 ├── CHANGELOG.md       # 完整版本历史、问题分析、解决方案
 ├── CONTRIBUTING.md    # 本文档 - 贡献指南
-├── test-summary.md    # 测试覆盖和验证结果
+├── test-output/       # 已跟踪的 HTML 测试输出快照
 └── test-report.md     # 自动生成的测试报告
 ```
 
@@ -20,7 +20,8 @@ pin-definition-by-underline/
 - **README.md** - Lapis集成指南、核心特性、使用示例
 - **CHANGELOG.md** - 记录版本演进，包含详细的问题分析和解决方案
 - **CONTRIBUTING.md** - 贡献流程、开发规范、文档维护指南
-- **test-summary.md** - 测试覆盖说明和技术验证
+- **test-output/** - HTML 测试输出快照，用于人工检查和回归对比
+- **test-report.md** - 本地生成的临时测试报告，不纳入版本控制
 
 ## 🚀 快速开始
 
@@ -130,7 +131,7 @@ npm test
    - 带 `<u>` 标记的目标释义
    - 代表性的测试场景
 3. 运行测试确保通过
-4. 更新 `test-summary.md`（如需要）
+4. 检查并更新 `test-output/` 快照（如输出变化）
 
 ### 测试覆盖要求
 
@@ -276,6 +277,7 @@ if (targetHasNum) {
 ### 发布检查清单
 
 - [ ] 所有测试通过（`./test.sh`）
+- [ ] 检查 `test-output/` 快照差异是否符合预期
 - [ ] 更新 `package.json` 中的版本号
 - [ ] 更新 `CHANGELOG.md` 添加版本记录
 - [ ] 更新 `README.md` 中的版本徽章（如需要）
@@ -321,4 +323,3 @@ if (targetHasNum) {
 **再次感谢你的贡献！** 🎉
 
 </div>
-

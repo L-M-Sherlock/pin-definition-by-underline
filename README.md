@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.13-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.13.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -222,7 +222,7 @@ pin-definition-by-underline/
 │   ├── 撮る.html        # ← 新增：num_circle 编号类型
 │   ├── 易い.html
 │   └── 載る.html
-├── test-output/        # 测试输出（gitignore）
+├── test-output/        # 测试输出快照（已跟踪）
 └── test-report.md      # 测试报告（gitignore）
 ```
 
@@ -257,6 +257,8 @@ pin-definition-by-underline/
 | 載る | 独立块识别 | ✅ 通过 |
 
 **测试结果**：11/11 通过 ✅
+
+`test-output/` 是用于人工检查和回归对比的 HTML 快照产物，随仓库一起跟踪；`test-report.md` 是本地运行 `./test.sh` 生成的临时报告，不纳入版本控制。
 
 ### 测试验证
 
@@ -328,11 +330,11 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.13** (2025-11-12)
+当前版本：**v1.13.0** (2025-11-12)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.13)
+### 最新更新 (v1.13.0)
 
 - ✅ **修复** `hasNum` 函数，添加对 `num_circle` 编号类型的支持
 - ✅ **新增** 测试用例「撮る」，验证 `num_circle` 编号的正确置顶
