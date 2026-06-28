@@ -2,13 +2,17 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.13.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.14.0-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
 ## 📖 简介
 
-这是一个为 [Lapis Anki 笔记模板](https://github.com/donkuri/lapis)增强功能的函数，专门用于处理**基于明镜日汉双解词典 Yomitan 1.4.4 版本**制作的词汇卡片。
+这是一个为 [Lapis Anki 笔记模板](https://github.com/donkuri/lapis)增强功能的函数，专门用于处理明镜系词典制作的词汇卡片。
+
+当前支持：
+- **明鏡日汉双解辞典**（Yomitan 1.4.4）
+- **明鏡国語辞典 第三版**
 
 当你在 Anki 卡片的释义中使用下划线 `<u>` 标记特定释义的编号时，这个函数能够自动识别并将该释义**置顶并高亮显示**，让你在复习时快速聚焦到最相关的定义。
 
@@ -18,7 +22,7 @@
 - 🔄 **智能重排** - 维护明镜词典的层级结构和语义完整性
 - 🎨 **视觉高亮** - 用黄色背景标记你关注的目标释义
 - 🚀 **自动置顶** - 将相关释义块移到卡片最顶部，提高复习效率
-- ✅ **完整测试** - 11 个测试用例覆盖明镜词典的各种复杂结构
+- ✅ **完整测试** - 13 个测试用例覆盖明镜词典的各种复杂结构
 - 🔍 **智能编号** - 支持 `num` 和 `num_circle` 两种编号类型
 - 🔧 **Lapis 兼容** - 专为 Lapis 笔记模板的 DOM 结构优化
 
@@ -45,7 +49,7 @@
 
 - ✅ 已安装 [Anki](https://apps.ankiweb.net/)
 - ✅ 已安装 [Lapis 笔记模板](https://github.com/donkuri/lapis)
-- ✅ 使用明镜日汉双解词典（Yomitan 1.4.4）制作卡片
+- ✅ 使用已支持的明镜系词典制作卡片
 - ✅ 在需要置顶的释义的编号上添加了 `<u>` 下划线标记
 
 ### 使用方法
@@ -59,7 +63,7 @@
 2. 选择一张 Lapis 模板的卡片，进入卡片编辑界面
 3. 点击「卡片…」按钮进入模板编辑界面
 4. 在「背面内容模板」标签页中找到 `initialize()` 函数
-5. 在 `initialize()` 函数上方添加 [`./script.js`](./script.js) 文件内的 `pinByUnderline()` 函数
+5. 在 `initialize()` 函数上方添加 [`./script.js`](./script.js) 的完整内容
 6. 在 `initialize()` 函数内部添加 `pinByUnderline()` 调用
 
 **具体操作**：
@@ -84,7 +88,7 @@
 ```
 
 **添加函数代码**：
-1. 将 `script.js` 中的 `pinByUnderline()` 函数完整复制
+1. 将构建后的 `script.js` 内容完整复制
 2. 粘贴到 Lapis 模板的 Template 区域（在 `initialize()` 函数之前）
 3. 在 `initialize()` 函数中调用 `pinByUnderline()`
 
@@ -95,6 +99,9 @@
 ```bash
 # 安装依赖
 npm install
+
+# 构建 script.js
+npm run build
 
 # 运行测试
 ./test.sh
@@ -130,10 +137,23 @@ npm install
 ### 1. 定位目标释义
 
 ```
+明鏡日汉双解辞典：
+
+```
 .yomitan-glossary 容器
   └─> <u> 下划线元素
       └─> div[data-sc-class="def1"] 目标释义
           └─> div[data-sc-class="mjrhsjcd-entry"] 词条容器
+              └─> li[data-dictionary] 词典条目
+```
+
+明鏡国語辞典 第三版：
+
+```
+.yomitan-glossary 容器
+  └─> <u> 下划线元素
+      └─> div[data-sc-meaning][data-sc-class="level0" 或 "level1"] 目标释义/分区
+          └─> div[data-sc-dic-item] 词条容器
               └─> li[data-dictionary] 词典条目
 ```
 
@@ -202,7 +222,12 @@ npm install
 
 ```
 pin-definition-by-underline/
-├── script.js           # 核心函数
+├── script.js           # 构建生成的可复制函数
+├── src/                # 源码
+│   ├── core.js         # 公共入口和适配器调度
+│   └── adapters/       # 辞典适配器
+├── scripts/
+│   └── build.js        # 生成 script.js
 ├── test.js             # 自动化测试
 ├── test.sh             # 测试管理函数
 ├── README.md          # 项目文档
@@ -210,7 +235,7 @@ pin-definition-by-underline/
 ├── CONTRIBUTING.md     # 贡献指南
 ├── package.json        # 依赖配置
 ├── .gitignore          # Git 忽略规则
-├── cases/              # 测试用例（11个）
+├── cases/              # 测试用例（13个）
 │   ├── いい加減.html
 │   ├── くれる.html
 │   ├── はずす.html
@@ -221,7 +246,9 @@ pin-definition-by-underline/
 │   ├── 回転.html
 │   ├── 撮る.html        # ← 新增：num_circle 编号类型
 │   ├── 易い.html
-│   └── 載る.html
+│   ├── 説.html          # 明鏡国語辞典 第三版 level0 分区
+│   ├── 載る.html
+│   └── 預ける.html      # 明鏡国語辞典 第三版
 ├── test-output/        # 测试输出快照（已跟踪）
 └── test-report.md      # 测试报告（gitignore）
 ```
@@ -254,9 +281,11 @@ pin-definition-by-underline/
 | 回転 | def1块重排 | ✅ 通过 |
 | 撮る | **num_circle 编号类型** | ✅ 通过 |
 | 易い | def1子释义 | ✅ 通过 |
+| 説 | 明鏡国語辞典 第三版 level0 分区 | ✅ 通过 |
 | 載る | 独立块识别 | ✅ 通过 |
+| 預ける | 明鏡国語辞典 第三版 level1 + 例句 | ✅ 通过 |
 
-**测试结果**：11/11 通过 ✅
+**测试结果**：13/13 通过 ✅
 
 `test-output/` 是用于人工检查和回归对比的 HTML 快照产物，随仓库一起跟踪；`test-report.md` 是本地运行 `./test.sh` 生成的临时报告，不纳入版本控制。
 
@@ -267,6 +296,8 @@ pin-definition-by-underline/
 - ✅ **置顶验证** - 确保目标释义在正确的位置
   - 带编号释义 → 应该是 def0 后第一个带编号的 def1
   - 子释义 → 应该是主释义后第一个子释义
+  - 国语第三版 level0 → 目标大分区及其子释义、例句整体置顶
+  - 国语第三版 level1 → 所属 level0 内目标释义与后续例句整体置顶
 - ✅ **编号类型** - 同时支持 `num` 和 `num_circle` 两种编号
 
 ## 🎯 核心设计原则
@@ -298,49 +329,54 @@ if (targetHasNum) {
 
 ### DOM 结构依赖
 
-函数依赖明镜日汉双解词典（Yomitan 1.4.4）特定的 DOM 结构：
+函数依赖各词典在 Yomitan/Lapis 中生成的特定 DOM 结构：
 
 | 选择器 | 说明 | 示例 |
 |--------|------|------|
 | `.yomitan-glossary` | Yomitan 词典内容容器 | Lapis 卡片的释义区域 |
+| `li[data-dictionary="明鏡日汉双解辞典"]` | 日汉双解词典条目 | 旧适配器入口 |
 | `div[data-sc-class="def0"]` | 块标记（词性/类别） | `（一）⟨名⟩`、`（二）⟨副⟩` |
 | `div[data-sc-class="def1"]` | 释义内容 | 主释义和子释义 |
 | `span[data-sc-class="num"]` | 释义编号（普通） | `①`、`②`、`㋐`、`㋑` |
 | `span[data-sc-class="num_circle"]` | 释义编号（带圆圈） | `51`、`52`、`58` 等 |
 | `div[data-sc-class="mjrhsjcd-entry"]` | 明镜词条容器 | 整个词条的包装元素 |
-| `li[data-dictionary]` | 词典条目 | Anki/Lapis 的词典列表项 |
+| `li[data-dictionary="明鏡国語辞典 第三版"]` | 国语第三版词典条目 | 新适配器入口 |
+| `div[data-sc-dic-item]` | 国语第三版词条容器 | 整个词条的包装元素 |
+| `div[data-sc-class="level0"]` | 国语第三版词性块/大分区 | `［他下一］`、`（造）` |
+| `div[data-sc-class="level1"]` | 国语第三版主释义 | `❶`、`❷`、`❸` |
+| `div[data-sc-example]` | 国语第三版例句 | 跟随前一个 `level1` 移动 |
 
 ## 📝 兼容性
 
 - ✅ **Lapis 笔记模板** - 专为 [Lapis](https://github.com/donkuri/lapis) 优化
 - ✅ **明镜日汉双解词典** - Yomitan 1.4.4 版本
+- ✅ **明鏡国語辞典 第三版** - 支持 `level0` 大分区、`level1` 主释义和后续例句整体置顶
 - ✅ **Anki 平台** - 桌面版和 AnkiWeb
 - ✅ **现代浏览器** - 支持 ES6+（Chrome、Firefox、Safari 等）
 - ⚠️ **DOM 结构依赖** - 依赖明镜词典的 `data-sc-class` 属性
-- ⚠️ **其他词典** - 可能需要根据不同词典的 DOM 结构调整代码
+- ⚠️ **其他词典** - 需要新增适配器并添加真实 HTML 测试用例
 
 ## ⚠️ 注意事项
 
 1. **集成要求** - ⚠️ **函数不支持独立使用**，必须集成到 Lapis 模板的 `initialize()` 函数中
 2. **标记方式** - 需要在 Anki 卡片编辑时，给释义编号添加 `<u>` 标签（如 `<u>②</u>`）
-3. **词典要求** - 目前仅支持明镜日汉双解词典（Yomitan 1.4.4）的 DOM 结构
+3. **词典要求** - 目前仅支持明镜日汉双解词典（Yomitan 1.4.4）和明鏡国語辞典 第三版的 DOM 结构
 4. **Lapis 模板** - 函数专为 Lapis 笔记模板优化，其他模板可能需要调整
 5. **模板修改** - 修改 Lapis 模板会影响所有使用该模板的卡片
 6. **性能考虑** - 函数在卡片加载时自动执行，无需手动调用
 
 ## 📜 版本历史
 
-当前版本：**v1.13.0** (2025-11-12)
+当前版本：**v1.14.0** (2026-06-28)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.13.0)
+### 最新更新 (v1.14.0)
 
-- ✅ **修复** `hasNum` 函数，添加对 `num_circle` 编号类型的支持
-- ✅ **新增** 测试用例「撮る」，验证 `num_circle` 编号的正确置顶
-- ✅ **增强** 测试系统，添加自动验证逻辑（高亮检查 + 置顶检查）
-- ✅ **改进** 测试脚本，支持动态生成测试报告状态
-- ✅ 11 个测试用例全部通过，从冒烟测试升级为功能测试
+- ✅ **新增** 明鏡国語辞典 第三版支持
+- ✅ **新增** 测试用例「預ける」和「説」，验证 `level1` 释义组和 `level0` 大分区置顶
+- ✅ **重构** 源码为 `src/` 适配器结构，并通过 `npm run build` 生成 `script.js`
+- ✅ 13 个测试用例全部通过
 
 ## 🤝 贡献
 

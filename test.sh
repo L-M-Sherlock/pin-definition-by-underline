@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 # 项目信息
 PROJECT_NAME="Pin Definition By Underline"
-VERSION="v1.13.0"
+VERSION="v1.14.0"
 SCRIPT_FILE="script.js"
 TEST_FILE="test.js"
 CASES_DIR="cases"
@@ -101,6 +101,10 @@ check_test_files() {
 # 运行测试
 run_tests() {
     print_message $BLUE "🚀 开始运行测试..."
+    echo
+
+    print_message $BLUE "🏗️  构建 script.js..."
+    npm run build
     echo
     
     # 运行测试并返回结果

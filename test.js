@@ -76,6 +76,163 @@ function loadScript() {
     return dom;
 }
 
+function hasNichihanNum(element) {
+    return element.querySelector('span[data-sc-class="num"]') ||
+           element.querySelector('span[data-sc-class="num_circle"]') ||
+           element.querySelector('div[data-sc-class="num"]') ||
+           element.querySelector('div[data-sc-class="num_circle"]');
+}
+
+function validateNichihan(underlinedElement) {
+    const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
+    if (!targetDef) {
+        throw new Error(`验证失败: 找不到带下划线元素的 def1 容器`);
+    }
+
+    if (!targetDef.style.backgroundColor || targetDef.style.backgroundColor === '') {
+        throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
+    }
+
+    const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
+    if (!entryContainer) {
+        throw new Error(`验证失败: 找不到 mjrhsjcd-entry 容器`);
+    }
+
+    let targetDef0 = null;
+    let current = targetDef.previousElementSibling;
+    while (current) {
+        if (current.matches && current.matches('div[data-sc-class="def0"]')) {
+            targetDef0 = current;
+            break;
+        }
+        current = current.previousElementSibling;
+    }
+
+    if (targetDef0) {
+        const targetHasNum = hasNichihanNum(targetDef);
+
+        if (targetHasNum) {
+            let firstNumDef = targetDef0.nextElementSibling;
+            while (firstNumDef) {
+                if (firstNumDef.matches && firstNumDef.matches('div[data-sc-class="def1"]')) {
+                    if (hasNichihanNum(firstNumDef)) {
+                        if (firstNumDef !== targetDef) {
+                            throw new Error(`验证失败: 目标释义未被置顶。第一个带编号的 def1 不是目标释义。`);
+                        }
+                        break;
+                    }
+                }
+                firstNumDef = firstNumDef.nextElementSibling;
+            }
+        } else {
+            let mainDef = null;
+            current = targetDef.previousElementSibling;
+            while (current) {
+                if (current.matches && current.matches('div[data-sc-class="def1"]') && hasNichihanNum(current)) {
+                    mainDef = current;
+                    break;
+                }
+                current = current.previousElementSibling;
+            }
+
+            if (mainDef) {
+                const firstSubDef = mainDef.nextElementSibling;
+                if (
+                    firstSubDef &&
+                    firstSubDef.matches &&
+                    firstSubDef.matches('div[data-sc-class="def1"]') &&
+                    !hasNichihanNum(firstSubDef) &&
+                    firstSubDef !== targetDef
+                ) {
+                    throw new Error(`验证失败: 目标子释义未被置顶到主释义后的第一位。`);
+                }
+            }
+        }
+    }
+}
+
+function validateKokugoV3(underlinedElement) {
+    const targetMeaning = underlinedElement.closest(
+        'div[data-sc-meaning][data-sc-class="level0"], div[data-sc-meaning][data-sc-class="level1"]'
+    );
+    if (!targetMeaning) {
+        throw new Error(`验证失败: 找不到带下划线元素的 level0/level1 容器`);
+    }
+
+    if (!targetMeaning.style.backgroundColor || targetMeaning.style.backgroundColor === '') {
+        throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
+    }
+
+    const body = targetMeaning.closest('div[data-sc-body]');
+    if (!body) {
+        throw new Error(`验证失败: 找不到明鏡国語辞典 第三版 body 容器`);
+    }
+
+    const targetLevel = targetMeaning.getAttribute('data-sc-class');
+
+    if (targetLevel === 'level0') {
+        const firstLevel0 = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
+        if (firstLevel0 !== targetMeaning) {
+            throw new Error(`验证失败: 国语第三版目标 level0 未置顶到第一个大分区位置`);
+        }
+
+        if (targetMeaning.getAttribute('data-sc-id') === '34215-D003') {
+            const firstChild = targetMeaning.nextElementSibling;
+            if (!firstChild || firstChild.getAttribute('data-sc-id') !== '34215-D004') {
+                throw new Error(`验证失败: 国语第三版 level0 子释义未随大分区一起移动`);
+            }
+        }
+
+        return;
+    }
+
+    let owningLevel0 = targetMeaning.previousElementSibling;
+    while (owningLevel0 && owningLevel0.getAttribute('data-sc-class') !== 'level0') {
+        owningLevel0 = owningLevel0.previousElementSibling;
+    }
+
+    let firstLevel1 = owningLevel0 ? owningLevel0.nextElementSibling : body.firstElementChild;
+    while (firstLevel1 && firstLevel1.getAttribute('data-sc-class') !== 'level1') {
+        if (firstLevel1.getAttribute('data-sc-class') === 'level0') {
+            break;
+        }
+        firstLevel1 = firstLevel1.nextElementSibling;
+    }
+
+    if (firstLevel1 !== targetMeaning) {
+        throw new Error(`验证失败: 国语第三版目标 level1 未置顶到所属大分区的第一个释义位置`);
+    }
+
+    if (targetMeaning.getAttribute('data-sc-id') === '00927-D005') {
+        const example = targetMeaning.nextElementSibling;
+        if (!example || example.getAttribute('data-sc-id') !== '00927-5009') {
+            throw new Error(`验证失败: 国语第三版目标释义的例句未随释义一起移动`);
+        }
+    }
+}
+
+function validateProcessedHtml(container, beforeHtml) {
+    const underlinedElement = container.querySelector('u');
+    if (!underlinedElement) {
+        if (container.innerHTML !== beforeHtml) {
+            throw new Error(`验证失败: 无下划线用例不应修改 DOM`);
+        }
+        console.log(`✓ 验证通过: 无下划线标记，DOM 保持不变`);
+        return;
+    }
+
+    const parentLi = underlinedElement.closest('li[data-dictionary]');
+    const dictionaryName = parentLi ? parentLi.getAttribute('data-dictionary') : '';
+
+    if (dictionaryName === '明鏡国語辞典 第三版') {
+        validateKokugoV3(underlinedElement);
+    } else {
+        validateNichihan(underlinedElement);
+    }
+
+    console.log(`✓ 验证通过: 目标释义已正确高亮和置顶`);
+}
+
 function testCase(inputFile, outputDir) {
     console.log(`\n🧪 测试 ${inputFile}...`);
     
@@ -89,6 +246,7 @@ function testCase(inputFile, outputDir) {
     // 将HTML插入到测试容器
     const container = dom.window.document.getElementById('test-container');
     container.innerHTML = htmlContent;
+    const beforeHtml = container.innerHTML;
     
     // 执行pinByUnderline函数
     try {
@@ -97,101 +255,7 @@ function testCase(inputFile, outputDir) {
         // 获取处理后的HTML
         const resultHtml = container.innerHTML;
         
-        // ===== 验证逻辑 =====
-        // 查找带下划线的元素
-        const underlinedElement = container.querySelector('u');
-        if (underlinedElement) {
-            // 验证1: 确保带下划线的元素对应的 def1 被高亮
-            const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
-            if (!targetDef) {
-                throw new Error(`验证失败: 找不到带下划线元素的 def1 容器`);
-            }
-            
-            if (!targetDef.style.backgroundColor || targetDef.style.backgroundColor === '') {
-                throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
-            }
-            
-            // 验证2: 确保目标释义被置顶到正确位置
-            // 找到目标所在的 def0 分组
-            const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
-            if (!entryContainer) {
-                throw new Error(`验证失败: 找不到 mjrhsjcd-entry 容器`);
-            }
-            
-            // 查找目标释义所属的 def0 块
-            let targetDef0 = null;
-            let current = targetDef.previousElementSibling;
-            while (current) {
-                if (current.matches && current.matches('div[data-sc-class="def0"]')) {
-                    targetDef0 = current;
-                    break;
-                }
-                current = current.previousElementSibling;
-            }
-            
-            if (targetDef0) {
-                // 检查目标释义本身是否有编号
-                const targetHasNum = targetDef.querySelector('span[data-sc-class="num"]') ||
-                                   targetDef.querySelector('span[data-sc-class="num_circle"]') ||
-                                   targetDef.querySelector('div[data-sc-class="num"]') ||
-                                   targetDef.querySelector('div[data-sc-class="num_circle"]');
-                
-                if (targetHasNum) {
-                    // 如果目标有编号，它应该是 def0 后的第一个带编号的 def1
-                    let firstNumDef = targetDef0.nextElementSibling;
-                    while (firstNumDef) {
-                        if (firstNumDef.matches && firstNumDef.matches('div[data-sc-class="def1"]')) {
-                            const hasNum = firstNumDef.querySelector('span[data-sc-class="num"]') ||
-                                         firstNumDef.querySelector('span[data-sc-class="num_circle"]') ||
-                                         firstNumDef.querySelector('div[data-sc-class="num"]') ||
-                                         firstNumDef.querySelector('div[data-sc-class="num_circle"]');
-                            if (hasNum) {
-                                // 找到第一个带编号的 def1
-                                if (firstNumDef !== targetDef) {
-                                    throw new Error(`验证失败: 目标释义未被置顶。第一个带编号的 def1 不是目标释义。`);
-                                }
-                                break;
-                            }
-                        }
-                        firstNumDef = firstNumDef.nextElementSibling;
-                    }
-                } else {
-                    // 如果目标没有编号（是子释义），验证它在其主释义的子释义中排第一
-                    // 找到前面最近的带编号的 def1（主释义）
-                    let mainDef = null;
-                    current = targetDef.previousElementSibling;
-                    while (current) {
-                        if (current.matches && current.matches('div[data-sc-class="def1"]')) {
-                            const hasNum = current.querySelector('span[data-sc-class="num"]') ||
-                                         current.querySelector('span[data-sc-class="num_circle"]') ||
-                                         current.querySelector('div[data-sc-class="num"]') ||
-                                         current.querySelector('div[data-sc-class="num_circle"]');
-                            if (hasNum) {
-                                mainDef = current;
-                                break;
-                            }
-                        }
-                        current = current.previousElementSibling;
-                    }
-                    
-                    if (mainDef) {
-                        // 检查目标是否是主释义后的第一个无编号 def1
-                        let firstSubDef = mainDef.nextElementSibling;
-                        if (firstSubDef && firstSubDef.matches && firstSubDef.matches('div[data-sc-class="def1"]')) {
-                            const hasNum = firstSubDef.querySelector('span[data-sc-class="num"]') ||
-                                         firstSubDef.querySelector('span[data-sc-class="num_circle"]') ||
-                                         firstSubDef.querySelector('div[data-sc-class="num"]') ||
-                                         firstSubDef.querySelector('div[data-sc-class="num_circle"]');
-                            if (!hasNum && firstSubDef !== targetDef) {
-                                throw new Error(`验证失败: 目标子释义未被置顶到主释义后的第一位。`);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            console.log(`✓ 验证通过: 目标释义已正确高亮和置顶`);
-        }
+        validateProcessedHtml(container, beforeHtml);
         
         // 保存输出
         const outputFile = inputFile;
@@ -201,6 +265,12 @@ function testCase(inputFile, outputDir) {
         if (!fs.existsSync(outputDir)) {
             fs.mkdirSync(outputDir, { recursive: true });
         }
+
+        const kokugoStyles = htmlContent.includes('明鏡国語辞典 第三版') ? `
+        .yomitan-glossary [data-dictionary="明鏡国語辞典 第三版"] [data-sc-class="level0"] { font-weight: bold; margin-left: -1em; }
+        .yomitan-glossary [data-dictionary="明鏡国語辞典 第三版"] [data-sc-class="level1"] { margin-left: 0; }
+        .yomitan-glossary [data-dictionary="明鏡国語辞典 第三版"] [data-sc-example] { margin-left: 1em; color: darkgreen; }
+        ` : '';
         
         // 写入完整的HTML文档
         const fullHtml = `<!DOCTYPE html>
@@ -232,6 +302,7 @@ function testCase(inputFile, outputDir) {
         .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="excn"] { color: limegreen; }
         .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="num"], 
         .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] div[data-sc-class="num"] { color: darkred; font-weight: bold; margin-left: -1em; }
+        ${kokugoStyles}
         ${htmlContent.includes('<style>') ? htmlContent.split('<style>')[1].split('</style>')[0] : ''}
     </style>
 </head>

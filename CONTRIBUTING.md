@@ -11,6 +11,8 @@ pin-definition-by-underline/
 ├── README.md          # 项目介绍、Lapis集成指南、核心特性
 ├── CHANGELOG.md       # 完整版本历史、问题分析、解决方案
 ├── CONTRIBUTING.md    # 本文档 - 贡献指南
+├── src/               # 源码和辞典适配器
+├── scripts/           # 构建脚本
 ├── test-output/       # 已跟踪的 HTML 测试输出快照
 └── test-report.md     # 自动生成的测试报告
 ```
@@ -20,6 +22,8 @@ pin-definition-by-underline/
 - **README.md** - Lapis集成指南、核心特性、使用示例
 - **CHANGELOG.md** - 记录版本演进，包含详细的问题分析和解决方案
 - **CONTRIBUTING.md** - 贡献流程、开发规范、文档维护指南
+- **src/** - 维护 `pinByUnderline()` 的源码和辞典适配器
+- **scripts/** - 生成根目录 `script.js` 的构建脚本
 - **test-output/** - HTML 测试输出快照，用于人工检查和回归对比
 - **test-report.md** - 本地生成的临时测试报告，不纳入版本控制
 
@@ -35,6 +39,9 @@ cd pin-definition-by-underline
 # 安装依赖
 npm install
 
+# 构建可复制到 Lapis 的 script.js
+npm run build
+
 # 运行测试
 npm test
 # 或
@@ -49,8 +56,9 @@ npm test
    git checkout -b feature/your-feature-name
    ```
 3. **编写代码** - 进行你的修改
-4. **运行测试** - 确保所有测试通过
+4. **构建并运行测试** - 确保所有测试通过
    ```bash
+   npm run build
    ./test.sh
    ```
 5. **提交代码** - 使用清晰的提交信息
@@ -114,6 +122,9 @@ git commit -m "test: 添加子释义处理测试用例"
 # 运行 Node.js 测试
 npm test
 
+# 只构建 script.js
+npm run build
+
 # 清理测试输出
 ./test.sh --clean
 
@@ -130,7 +141,7 @@ npm test
    - 完整的 Yomitan 词典结构
    - 带 `<u>` 标记的目标释义
    - 代表性的测试场景
-3. 运行测试确保通过
+3. 运行 `npm test` 确保构建和测试通过
 4. 检查并更新 `test-output/` 快照（如输出变化）
 
 ### 测试覆盖要求
@@ -138,6 +149,7 @@ npm test
 - ✅ 所有修改必须通过现有测试
 - ✅ 新功能需要添加对应测试
 - ✅ Bug 修复需要添加回归测试
+- ✅ 修改 `src/` 后必须重新生成并提交 `script.js`
 
 ## 📄 文档维护
 
@@ -277,6 +289,7 @@ if (targetHasNum) {
 ### 发布检查清单
 
 - [ ] 所有测试通过（`./test.sh`）
+- [ ] `script.js` 已由 `npm run build` 从 `src/` 重新生成
 - [ ] 检查 `test-output/` 快照差异是否符合预期
 - [ ] 更新 `package.json` 中的版本号
 - [ ] 更新 `CHANGELOG.md` 添加版本记录
