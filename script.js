@@ -400,6 +400,44 @@
             return null;
         }
 
+        function setImportantStyle(element, property, value) {
+            if (element) {
+                element.style.setProperty(property, value, 'important');
+            }
+        }
+
+        function normalizeLeadingGaiji(targetMeaning) {
+            if (!isLevel0(targetMeaning)) return;
+
+            const leadingGaiji = targetMeaning.firstElementChild;
+            if (!leadingGaiji || !leadingGaiji.matches('[data-sc-img][data-sc-gaiji]')) return;
+
+            const imageLink = leadingGaiji.querySelector('.gloss-image-link');
+            const imageContainer = leadingGaiji.querySelector('.gloss-image-container');
+
+            setImportantStyle(leadingGaiji, 'display', 'inline-block');
+            setImportantStyle(leadingGaiji, 'width', '1em');
+            setImportantStyle(leadingGaiji, 'height', '1em');
+            setImportantStyle(leadingGaiji, 'line-height', '1');
+            setImportantStyle(leadingGaiji, 'vertical-align', '-0.12em');
+            setImportantStyle(leadingGaiji, 'margin-right', '0.15em');
+
+            setImportantStyle(imageLink, 'display', 'inline-block');
+            setImportantStyle(imageLink, 'width', '1em');
+            setImportantStyle(imageLink, 'height', '1em');
+            setImportantStyle(imageLink, 'max-width', '1em');
+            setImportantStyle(imageLink, 'line-height', '1');
+            setImportantStyle(imageLink, 'vertical-align', 'middle');
+
+            setImportantStyle(imageContainer, 'width', '1em');
+            setImportantStyle(imageContainer, 'height', '1em');
+            setImportantStyle(imageContainer, 'max-width', '1em');
+            setImportantStyle(imageContainer, 'max-height', '1em');
+            setImportantStyle(imageContainer, 'font-size', '1em');
+            setImportantStyle(imageContainer, 'line-height', '1');
+            setImportantStyle(imageContainer, 'vertical-align', 'middle');
+        }
+
         function canHandle(context) {
             const targetMeaning = getTargetMeaning(context.underlinedElement);
             return Boolean(targetMeaning && targetMeaning.closest('div[data-sc-dic-item]') && getBody(targetMeaning));
@@ -419,6 +457,7 @@
                 findLevel0InsertionPoint(body) :
                 findLevel1InsertionPoint(body, targetMeaning);
 
+            normalizeLeadingGaiji(targetMeaning);
             context.highlightElement(targetMeaning);
 
             if (insertionPoint && insertionPoint !== targetMeaning) {

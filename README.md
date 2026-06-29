@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.14.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.14.1-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -367,16 +367,15 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.14.0** (2026-06-28)
+当前版本：**v1.14.1** (2026-06-29)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.14.0)
+### 最新更新 (v1.14.1)
 
-- ✅ **新增** 明鏡国語辞典 第三版支持
-- ✅ **新增** 测试用例「預ける」和「説」，验证 `level1` 释义组和 `level0` 大分区置顶
-- ✅ **重构** 源码为 `src/` 适配器结构，并通过 `npm run build` 生成 `script.js`
-- ✅ 13 个测试用例全部通过
+- ✅ **修复** 明鏡国語辞典 第三版 `level0` 置顶后前导 gaiji 图片撑开行宽导致的条目错位
+- ✅ **验证** 测试用例「説」覆盖 Anki 手动下划线后的 `［名］` 标记和 gaiji 压缩
+- ✅ **保持** 13 个测试用例全部通过
 
 ## 🤝 贡献
 

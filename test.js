@@ -171,6 +171,22 @@ function validateKokugoV3(underlinedElement) {
     const targetLevel = targetMeaning.getAttribute('data-sc-class');
 
     if (targetLevel === 'level0') {
+        const leadingGaiji = targetMeaning.firstElementChild;
+        if (leadingGaiji && leadingGaiji.matches('[data-sc-img][data-sc-gaiji]')) {
+            const imageLink = leadingGaiji.querySelector('.gloss-image-link');
+            const imageContainer = leadingGaiji.querySelector('.gloss-image-container');
+
+            if (
+                leadingGaiji.style.getPropertyValue('width') !== '1em' ||
+                !imageLink ||
+                imageLink.style.getPropertyValue('width') !== '1em' ||
+                !imageContainer ||
+                imageContainer.style.getPropertyValue('width') !== '1em'
+            ) {
+                throw new Error(`验证失败: 国语第三版 level0 前导 gaiji 图片未压缩，可能导致置顶条目错位`);
+            }
+        }
+
         const firstLevel0 = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
         if (firstLevel0 !== targetMeaning) {
             throw new Error(`验证失败: 国语第三版目标 level0 未置顶到第一个大分区位置`);
