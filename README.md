@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.14.1-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.14.2-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -22,7 +22,7 @@
 - 🔄 **智能重排** - 维护明镜词典的层级结构和语义完整性
 - 🎨 **视觉高亮** - 用黄色背景标记你关注的目标释义
 - 🚀 **自动置顶** - 将相关释义块移到卡片最顶部，提高复习效率
-- ✅ **完整测试** - 13 个测试用例覆盖明镜词典的各种复杂结构
+- ✅ **完整测试** - 14 个测试用例覆盖明镜词典的各种复杂结构
 - 🔍 **智能编号** - 支持 `num` 和 `num_circle` 两种编号类型
 - 🔧 **Lapis 兼容** - 专为 Lapis 笔记模板的 DOM 结构优化
 
@@ -235,13 +235,14 @@ pin-definition-by-underline/
 ├── CONTRIBUTING.md     # 贡献指南
 ├── package.json        # 依赖配置
 ├── .gitignore          # Git 忽略规则
-├── cases/              # 测试用例（13个）
+├── cases/              # 测试用例（14个）
 │   ├── いい加減.html
 │   ├── くれる.html
 │   ├── はずす.html
 │   ├── まさか.html
 │   ├── め.html
 │   ├── 一体.html
+│   ├── 付き.html        # 明鏡国語辞典 第三版 level1 跨分区置顶
 │   ├── 代.html
 │   ├── 回転.html
 │   ├── 撮る.html        # ← 新增：num_circle 编号类型
@@ -277,6 +278,7 @@ pin-definition-by-underline/
 | まさか | def0优先级 | ✅ 通过 |
 | め | def0编号组顺序保持 | ✅ 通过 |
 | 一体 | def0块重排 | ✅ 通过 |
+| 付き | 明鏡国語辞典 第三版 level1 跨分区置顶 | ✅ 通过 |
 | 代 | def0标记保持 | ✅ 通过 |
 | 回転 | def1块重排 | ✅ 通过 |
 | 撮る | **num_circle 编号类型** | ✅ 通过 |
@@ -285,7 +287,7 @@ pin-definition-by-underline/
 | 載る | 独立块识别 | ✅ 通过 |
 | 預ける | 明鏡国語辞典 第三版 level1 + 例句 | ✅ 通过 |
 
-**测试结果**：13/13 通过 ✅
+**测试结果**：14/14 通过 ✅
 
 `test-output/` 是用于人工检查和回归对比的 HTML 快照产物，随仓库一起跟踪；`test-report.md` 是本地运行 `./test.sh` 生成的临时报告，不纳入版本控制。
 
@@ -297,7 +299,7 @@ pin-definition-by-underline/
   - 带编号释义 → 应该是 def0 后第一个带编号的 def1
   - 子释义 → 应该是主释义后第一个子释义
   - 国语第三版 level0 → 目标大分区及其子释义、例句整体置顶
-  - 国语第三版 level1 → 所属 level0 内目标释义与后续例句整体置顶
+  - 国语第三版 level1 → 所属 level0 整组置顶，目标释义与后续例句移动到该分区第一位
 - ✅ **编号类型** - 同时支持 `num` 和 `num_circle` 两种编号
 
 ## 🎯 核心设计原则
@@ -367,15 +369,15 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.14.1** (2026-06-29)
+当前版本：**v1.14.2** (2026-07-02)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.14.1)
+### 最新更新 (v1.14.2)
 
-- ✅ **修复** 明鏡国語辞典 第三版 `level0` 置顶后前导 gaiji 图片撑开行宽导致的条目错位
-- ✅ **验证** 测试用例「説」覆盖 Anki 手动下划线后的 `［名］` 标记和 gaiji 压缩
-- ✅ **保持** 13 个测试用例全部通过
+- ✅ **修复** 明鏡国語辞典 第三版 `level1` 目标只在分区内置顶、没有把所属 `level0` 分区提到词条顶部的问题
+- ✅ **新增** 测试用例「付き」，覆盖 `level1` 跨分区置顶和例句跟随移动
+- ✅ **保持** 14 个测试用例全部通过
 
 ## 🤝 贡献
 

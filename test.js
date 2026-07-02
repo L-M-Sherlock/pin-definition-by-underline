@@ -172,7 +172,7 @@ function validateKokugoV3(underlinedElement) {
 
     if (targetLevel === 'level0') {
         const leadingGaiji = targetMeaning.firstElementChild;
-        if (leadingGaiji && leadingGaiji.matches('[data-sc-img][data-sc-gaiji]')) {
+        if (leadingGaiji && leadingGaiji.matches('[data-sc-img][data-sc-gaiji]') && leadingGaiji.querySelector('img.gloss-image')) {
             const imageLink = leadingGaiji.querySelector('.gloss-image-link');
             const imageContainer = leadingGaiji.querySelector('.gloss-image-container');
 
@@ -207,6 +207,11 @@ function validateKokugoV3(underlinedElement) {
         owningLevel0 = owningLevel0.previousElementSibling;
     }
 
+    const firstLevel0 = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
+    if (firstLevel0 !== owningLevel0) {
+        throw new Error(`验证失败: 国语第三版目标 level1 所属大分区未置顶到第一个大分区位置`);
+    }
+
     let firstLevel1 = owningLevel0 ? owningLevel0.nextElementSibling : body.firstElementChild;
     while (firstLevel1 && firstLevel1.getAttribute('data-sc-class') !== 'level1') {
         if (firstLevel1.getAttribute('data-sc-class') === 'level0') {
@@ -223,6 +228,24 @@ function validateKokugoV3(underlinedElement) {
         const example = targetMeaning.nextElementSibling;
         if (!example || example.getAttribute('data-sc-id') !== '00927-5009') {
             throw new Error(`验证失败: 国语第三版目标释义的例句未随释义一起移动`);
+        }
+    }
+
+    if (targetMeaning.getAttribute('data-sc-id') === '41148-D009') {
+        const movedExamples = [];
+        let current = targetMeaning.nextElementSibling;
+        while (current && current.matches('div[data-sc-example]')) {
+            movedExamples.push(current.getAttribute('data-sc-id'));
+            current = current.nextElementSibling;
+        }
+
+        const expectedExamples = ['41148-5005', '41148-5006', '41148-5007'];
+        if (movedExamples.join(',') !== expectedExamples.join(',')) {
+            throw new Error(`验证失败: 国语第三版「付き」目标释义的例句未随释义一起移动`);
+        }
+
+        if (!current || current.getAttribute('data-sc-id') !== '41148-D007') {
+            throw new Error(`验证失败: 国语第三版「付き」目标释义未置顶到所属大分区内第一位`);
         }
     }
 }
