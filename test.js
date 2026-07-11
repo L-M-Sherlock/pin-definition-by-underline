@@ -83,15 +83,25 @@ function hasNichihanNum(element) {
            element.querySelector('div[data-sc-class="num_circle"]');
 }
 
-function validateNichihan(underlinedElement) {
+function validateHighlightColor(targetElement, expectedHighlightColor) {
+    const actualHighlightColor = targetElement.ownerDocument.defaultView
+        .getComputedStyle(targetElement)
+        .backgroundColor;
+
+    if (actualHighlightColor !== expectedHighlightColor) {
+        throw new Error(
+            `验证失败: 目标释义高亮颜色错误，期望 ${expectedHighlightColor}，实际 ${actualHighlightColor}`
+        );
+    }
+}
+
+function validateNichihan(underlinedElement, expectedHighlightColor) {
     const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
     if (!targetDef) {
         throw new Error(`验证失败: 找不到带下划线元素的 def1 容器`);
     }
 
-    if (!targetDef.style.backgroundColor || targetDef.style.backgroundColor === '') {
-        throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
-    }
+    validateHighlightColor(targetDef, expectedHighlightColor);
 
     const entryContainer = targetDef.closest('div[data-sc-class="mjrhsjcd-entry"]');
     if (!entryContainer) {
@@ -151,7 +161,7 @@ function validateNichihan(underlinedElement) {
     }
 }
 
-function validateKokugoV3(underlinedElement) {
+function validateKokugoV3(underlinedElement, expectedHighlightColor) {
     const targetMeaning = underlinedElement.closest(
         'div[data-sc-meaning][data-sc-class="level0"], div[data-sc-meaning][data-sc-class="level1"]'
     );
@@ -159,9 +169,7 @@ function validateKokugoV3(underlinedElement) {
         throw new Error(`验证失败: 找不到带下划线元素的 level0/level1 容器`);
     }
 
-    if (!targetMeaning.style.backgroundColor || targetMeaning.style.backgroundColor === '') {
-        throw new Error(`验证失败: 目标释义未被高亮 (backgroundColor 未设置)`);
-    }
+    validateHighlightColor(targetMeaning, expectedHighlightColor);
 
     const body = targetMeaning.closest('div[data-sc-body]');
     if (!body) {
@@ -250,7 +258,7 @@ function validateKokugoV3(underlinedElement) {
     }
 }
 
-function validateProcessedHtml(container, beforeHtml) {
+function validateProcessedHtml(container, beforeHtml, expectedHighlightColor) {
     const underlinedElement = container.querySelector('u');
     if (!underlinedElement) {
         if (container.innerHTML !== beforeHtml) {
@@ -264,19 +272,29 @@ function validateProcessedHtml(container, beforeHtml) {
     const dictionaryName = parentLi ? parentLi.getAttribute('data-dictionary') : '';
 
     if (dictionaryName === '明鏡国語辞典 第三版') {
-        validateKokugoV3(underlinedElement);
+        validateKokugoV3(underlinedElement, expectedHighlightColor);
     } else {
-        validateNichihan(underlinedElement);
+        validateNichihan(underlinedElement, expectedHighlightColor);
     }
 
     console.log(`✓ 验证通过: 目标释义已正确高亮和置顶`);
 }
 
-function testCase(inputFile, outputDir) {
-    console.log(`\n🧪 测试 ${inputFile}...`);
+function testCase(inputFile, outputDir, options = {}) {
+    const nightMode = options.nightMode === true;
+    const outputFile = options.outputFile || inputFile;
+    const modeLabel = nightMode ? '夜间模式' : '白天模式';
+    const outputModeSuffix = nightMode ? ` (${modeLabel})` : '';
+    const expectedHighlightColor = nightMode ? 'rgb(0, 0, 0)' : 'rgb(255, 242, 168)';
+
+    console.log(`\n🧪 测试 ${inputFile} (${modeLabel})...`);
     
     // 加载测试环境
     const dom = loadScript();
+
+    if (nightMode) {
+        dom.window.document.body.classList.add('card', 'nightMode');
+    }
     
     // 读取输入HTML
     const inputPath = path.join(__dirname, 'cases', inputFile);
@@ -294,10 +312,9 @@ function testCase(inputFile, outputDir) {
         // 获取处理后的HTML
         const resultHtml = container.innerHTML;
         
-        validateProcessedHtml(container, beforeHtml);
+        validateProcessedHtml(container, beforeHtml, expectedHighlightColor);
         
         // 保存输出
-        const outputFile = inputFile;
         const outputPath = path.join(outputDir, outputFile);
         
         // 确保输出目录存在
@@ -310,6 +327,13 @@ function testCase(inputFile, outputDir) {
         .yomitan-glossary [data-dictionary="明鏡国語辞典 第三版"] [data-sc-class="level1"] { margin-left: 0; }
         .yomitan-glossary [data-dictionary="明鏡国語辞典 第三版"] [data-sc-example] { margin-left: 1em; color: darkgreen; }
         ` : '';
+        const nightModeStyles = nightMode ? `
+        body.nightMode { background-color: #2c2c2c; color: #fcfcfc; }
+        body.nightMode .yomitan-glossary .gloss-sc-div { color: #fcfcfc !important; }
+        body.nightMode .test-info { background-color: #3a3a3a; }
+        ` : '';
+        const highlightStyleElement = dom.window.document.getElementById('pin-by-underline-highlight-styles');
+        const highlightStyles = highlightStyleElement ? highlightStyleElement.textContent : '';
         
         // 写入完整的HTML文档
         const fullHtml = `<!DOCTYPE html>
@@ -319,6 +343,8 @@ function testCase(inputFile, outputDir) {
     <title>Test Output - ${inputFile}</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
+        ${nightModeStyles}
+        ${highlightStyles}
         .test-info { background: #f0f0f0; padding: 10px; margin-bottom: 20px; border-radius: 5px; }
         .highlight { background-color: #fff2a8 !important; }
         .yomitan-glossary [data-dictionary="明鏡日汉双解辞典"] span[data-sc-class="mjrhsjcd-entry"], 
@@ -345,11 +371,11 @@ function testCase(inputFile, outputDir) {
         ${htmlContent.includes('<style>') ? htmlContent.split('<style>')[1].split('</style>')[0] : ''}
     </style>
 </head>
-<body>
+<body${nightMode ? ' class="card nightMode"' : ''}>
     <div class="test-info">
-        <h2>🧪 测试结果: ${inputFile}</h2>
+        <h2>🧪 测试结果: ${inputFile}${outputModeSuffix}</h2>
         <p><strong>输入文件:</strong> cases/${inputFile}</p>
-        <p><strong>说明:</strong> 黄色背景表示被置顶的目标释义</p>
+        <p><strong>说明:</strong> ${nightMode ? '黑色' : '黄色'}背景表示被置顶的目标释义</p>
     </div>
     
     <div class="yomitan-glossary">
@@ -396,6 +422,43 @@ function testCase(inputFile, outputDir) {
     }
 }
 
+function testDelayedNightMode(inputFile) {
+    console.log(`\n🧪 测试 ${inputFile} (延迟注入夜间模式)...`);
+
+    try {
+        const dom = loadScript();
+        const inputPath = path.join(__dirname, 'cases', inputFile);
+        const htmlContent = fs.readFileSync(inputPath, 'utf8');
+        const container = dom.window.document.getElementById('test-container');
+        container.innerHTML = htmlContent;
+
+        pinByUnderline();
+
+        const underlinedElement = container.querySelector('u');
+        const targetElement = underlinedElement.closest(
+            'div[data-sc-class="def1"], div[data-sc-meaning][data-sc-class="level0"], div[data-sc-meaning][data-sc-class="level1"]'
+        );
+
+        validateHighlightColor(targetElement, 'rgb(255, 242, 168)');
+
+        dom.window.document.body.classList.add('card', 'nightMode');
+        validateHighlightColor(targetElement, 'rgb(0, 0, 0)');
+
+        dom.window.document.body.classList.remove('nightMode');
+        validateHighlightColor(targetElement, 'rgb(255, 242, 168)');
+
+        dom.window.document.documentElement.classList.add('night-mode');
+        validateHighlightColor(targetElement, 'rgb(0, 0, 0)');
+
+        console.log(`✓ 验证通过: 夜间类晚于脚本注入时，高亮会自动切换为黑色`);
+        return true;
+    } catch (error) {
+        console.error(`❌ 测试失败: ${error.message}`);
+        console.error(error.stack);
+        return false;
+    }
+}
+
 function runAllTests() {
     console.log('🚀 开始运行所有测试用例...\n');
     
@@ -420,6 +483,25 @@ function runAllTests() {
     testFiles.forEach(file => {
         const success = testCase(file, outputDir);
         if (success) {
+            passed++;
+        } else {
+            failed++;
+        }
+    });
+
+    const nightModeSuccess = testCase('付き.html', outputDir, {
+        nightMode: true,
+        outputFile: '付き-night.html'
+    });
+    if (nightModeSuccess) {
+        passed++;
+    } else {
+        failed++;
+    }
+
+    ['付き.html', '撮る.html'].forEach(file => {
+        const delayedNightModeSuccess = testDelayedNightMode(file);
+        if (delayedNightModeSuccess) {
             passed++;
         } else {
             failed++;

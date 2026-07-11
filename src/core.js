@@ -5,15 +5,34 @@ function pinByUnderline() {
     const underlinedElement = glossary.querySelector('u');
     if (!underlinedElement) return;
 
-    const htmlElement = document.documentElement;
-    const isNightMode = htmlElement.classList.contains('night-mode');
-    const highlightColor = isNightMode ? '#000000' : '#fff2a8';
+    const highlightClassName = 'pin-by-underline-highlight';
+
+    function ensureHighlightStyles() {
+        const styleId = 'pin-by-underline-highlight-styles';
+        if (document.getElementById(styleId)) return;
+
+        const styleElement = document.createElement('style');
+        styleElement.id = styleId;
+        styleElement.textContent = `
+.${highlightClassName} {
+    background-color: #fff2a8 !important;
+}
+
+.nightMode .${highlightClassName},
+.night_mode .${highlightClassName},
+.night-mode .${highlightClassName} {
+    background-color: #000000 !important;
+}
+`;
+        document.head.appendChild(styleElement);
+    }
 
     const context = {
         glossary,
         underlinedElement,
         highlightElement(element) {
-            element.style.backgroundColor = highlightColor;
+            ensureHighlightStyles();
+            element.classList.add(highlightClassName);
         },
         moveDictionaryToTop(element) {
             const parentLi = element.closest('li[data-dictionary]');
