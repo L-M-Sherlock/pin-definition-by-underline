@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.14.2-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.14.3-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -369,15 +369,15 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.14.2** (2026-07-02)
+当前版本：**v1.14.3** (2026-07-11)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.14.2)
+### 最新更新 (v1.14.3)
 
-- ✅ **修复** 明鏡国語辞典 第三版 `level1` 目标只在分区内置顶、没有把所属 `level0` 分区提到词条顶部的问题
-- ✅ **新增** 测试用例「付き」，覆盖 `level1` 跨分区置顶和例句跟随移动
-- ✅ **保持** 14 个测试用例全部通过
+- ✅ **修复** AnkiMobile Browse 答案预览中夜间模式高亮仍显示为白天浅黄色的问题
+- ✅ **兼容** `.nightMode`、`.night_mode` 和 `.night-mode`，夜间类延迟注入后高亮也会自动更新
+- ✅ **验证** 17 项自动测试全部通过，并完成移动端浏览器布局检查
 
 ## 🤝 贡献
 

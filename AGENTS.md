@@ -33,3 +33,15 @@ Every test conclusion must include an actual browser rendering check of the rele
 Recent history mostly uses concise conventional prefixes such as `feat:`, `fix:`, `docs:`, and `test:`. Keep commit subjects imperative and scoped, for example `fix: pin kokugo level1 groups`.
 
 Pull requests should describe the dictionary structure affected, list commands run, and include screenshots or notes for visual rendering changes. Mention any updated fixtures and snapshots explicitly.
+
+## Release Checklist
+
+Before committing a user-visible fix or feature, complete the release bookkeeping in the same change unless the user explicitly says not to release it:
+
+1. Choose the appropriate semantic version bump and keep every tracked version surface in sync: `package.json`, the README version badge, and the README current-version section. Update a lockfile too only if the repository tracks it.
+2. Prepend a dated entry to `CHANGELOG.md` describing the behavior change and the validation performed.
+3. Run `npm run build` and include both the edited `src/` files and regenerated `script.js`.
+4. Run the full test suite, refresh and commit affected `test-output/` snapshots, then inspect the relevant output in a real browser as required above.
+5. Before committing, run `git diff --check` and review `git status` to confirm that version files, changelog, generated output, tests, and snapshots are all included.
+
+Do not consider a user-visible fix ready to commit while its version number or changelog entry still describes the previous release.
