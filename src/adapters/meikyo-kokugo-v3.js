@@ -23,6 +23,19 @@ function createMeikyoKokugoV3Adapter() {
         return element.matches('div[data-sc-meaning][data-sc-class="level1"]');
     }
 
+    function isEntryTail(element) {
+        if (element.matches('div[data-sc-ruigo_items], div[data-sc-class="ruigo-items"]')) {
+            return true;
+        }
+
+        return element.matches('div[data-sc-sanko], div[data-sc-class="sanko"]') &&
+            Boolean(element.querySelector('[data-sc-kakiwake]'));
+    }
+
+    function isShikiri(element) {
+        return element.matches('div[data-sc-shikiri], div[data-sc-class="shikiri"]');
+    }
+
     function getBody(targetMeaning) {
         return targetMeaning.closest('div[data-sc-body]');
     }
@@ -43,7 +56,7 @@ function createMeikyoKokugoV3Adapter() {
         const nodes = [targetMeaning];
         let next = targetMeaning.nextElementSibling;
 
-        while (next && !isLevel0(next)) {
+        while (next && !isLevel0(next) && !isEntryTail(next)) {
             nodes.push(next);
             next = next.nextElementSibling;
         }
@@ -51,8 +64,18 @@ function createMeikyoKokugoV3Adapter() {
         return nodes;
     }
 
-    function findLevel0InsertionPoint(body) {
-        return body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
+    function findLevel0InsertionPoint(body, targetLevel0) {
+        let insertionPoint = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
+        if (!insertionPoint) return null;
+        if (insertionPoint === targetLevel0) return targetLevel0;
+
+        let previous = insertionPoint.previousElementSibling;
+        while (previous && isShikiri(previous)) {
+            insertionPoint = previous;
+            previous = previous.previousElementSibling;
+        }
+
+        return insertionPoint;
     }
 
     function findOwningLevel0(targetMeaning) {
@@ -98,11 +121,11 @@ function createMeikyoKokugoV3Adapter() {
         const leadingGaiji = targetMeaning.firstElementChild;
         if (!leadingGaiji || !leadingGaiji.matches('[data-sc-img][data-sc-gaiji]')) return;
 
-        const image = leadingGaiji.querySelector('img.gloss-image');
+        const image = leadingGaiji.querySelector('img');
         if (!image) return;
 
-        const imageLink = leadingGaiji.querySelector('.gloss-image-link');
-        const imageContainer = leadingGaiji.querySelector('.gloss-image-container');
+        const imageLink = leadingGaiji.querySelector('.gloss-image-link') || image.closest('a');
+        const imageContainer = leadingGaiji.querySelector('.gloss-image-container') || image.parentElement;
 
         setImportantStyle(leadingGaiji, 'display', 'inline-block');
         setImportantStyle(leadingGaiji, 'width', '1em');
@@ -129,12 +152,12 @@ function createMeikyoKokugoV3Adapter() {
 
     function canHandle(context) {
         const targetMeaning = getTargetMeaning(context.underlinedElement);
-        return Boolean(targetMeaning && targetMeaning.closest('div[data-sc-dic-item]') && getBody(targetMeaning));
+        return Boolean(targetMeaning && getBody(targetMeaning));
     }
 
     function pinLevel0(context, body, targetMeaning) {
         const nodesToMove = collectLevel0Group(targetMeaning);
-        const insertionPoint = findLevel0InsertionPoint(body);
+        const insertionPoint = findLevel0InsertionPoint(body, targetMeaning);
 
         normalizeLeadingGaiji(targetMeaning);
         context.highlightElement(targetMeaning);
@@ -158,7 +181,7 @@ function createMeikyoKokugoV3Adapter() {
         }
 
         const level0Nodes = collectLevel0Group(owningLevel0);
-        const level0InsertionPoint = findLevel0InsertionPoint(body);
+        const level0InsertionPoint = findLevel0InsertionPoint(body, owningLevel0);
 
         normalizeLeadingGaiji(owningLevel0);
 

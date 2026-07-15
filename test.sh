@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 
 # 项目信息
 PROJECT_NAME="Pin Definition By Underline"
-VERSION="v1.14.2"
+VERSION="v1.14.4"
 SCRIPT_FILE="script.js"
 TEST_FILE="test.js"
 CASES_DIR="cases"

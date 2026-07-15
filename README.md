@@ -2,7 +2,7 @@
 
 > 为 [Lapis](https://github.com/donkuri/lapis) Anki 笔记模板提供的智能释义置顶函数
 
-[![Version](https://img.shields.io/badge/version-1.14.3-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.14.4-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
@@ -369,15 +369,15 @@ if (targetHasNum) {
 
 ## 📜 版本历史
 
-当前版本：**v1.14.3** (2026-07-11)
+当前版本：**v1.14.4** (2026-07-15)
 
 查看完整版本历史和更新日志：[CHANGELOG.md](CHANGELOG.md)
 
-### 最新更新 (v1.14.3)
+### 最新更新 (v1.14.4)
 
-- ✅ **修复** AnkiMobile Browse 答案预览中夜间模式高亮仍显示为白天浅黄色的问题
-- ✅ **兼容** `.nightMode`、`.night_mode` 和 `.night-mode`，夜间类延迟注入后高亮也会自动更新
-- ✅ **验证** 17 项自动测试全部通过，并完成移动端浏览器布局检查
+- ✅ **修复** 明鏡国語辞典 第三版词条缺少 `data-sc-dic-item` 包装层时无法置顶的问题
+- ✅ **兼容** 「引く」等新版扁平 DOM，并处理无 class gaiji、分区标题与词条尾部说明的布局边界
+- ✅ **验证** 新增「引く」回归快照，18 项自动测试及 Chrome 移动端布局检查全部通过
 
 ## 🤝 贡献
 

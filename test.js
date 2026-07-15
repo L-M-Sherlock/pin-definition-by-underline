@@ -95,6 +95,27 @@ function validateHighlightColor(targetElement, expectedHighlightColor) {
     }
 }
 
+function validateKokugoLeadingGaiji(level0) {
+    const leadingGaiji = level0.firstElementChild;
+    if (!leadingGaiji || !leadingGaiji.matches('[data-sc-img][data-sc-gaiji]')) return;
+
+    const image = leadingGaiji.querySelector('img');
+    if (!image) return;
+
+    const imageLink = leadingGaiji.querySelector('.gloss-image-link') || image.closest('a');
+    const imageContainer = leadingGaiji.querySelector('.gloss-image-container') || image.parentElement;
+
+    if (
+        leadingGaiji.style.getPropertyValue('width') !== '1em' ||
+        !imageLink ||
+        imageLink.style.getPropertyValue('width') !== '1em' ||
+        !imageContainer ||
+        imageContainer.style.getPropertyValue('width') !== '1em'
+    ) {
+        throw new Error(`验证失败: 国语第三版 level0 前导 gaiji 图片未压缩，可能导致置顶条目错位`);
+    }
+}
+
 function validateNichihan(underlinedElement, expectedHighlightColor) {
     const targetDef = underlinedElement.closest('div[data-sc-class="def1"]');
     if (!targetDef) {
@@ -179,21 +200,7 @@ function validateKokugoV3(underlinedElement, expectedHighlightColor) {
     const targetLevel = targetMeaning.getAttribute('data-sc-class');
 
     if (targetLevel === 'level0') {
-        const leadingGaiji = targetMeaning.firstElementChild;
-        if (leadingGaiji && leadingGaiji.matches('[data-sc-img][data-sc-gaiji]') && leadingGaiji.querySelector('img.gloss-image')) {
-            const imageLink = leadingGaiji.querySelector('.gloss-image-link');
-            const imageContainer = leadingGaiji.querySelector('.gloss-image-container');
-
-            if (
-                leadingGaiji.style.getPropertyValue('width') !== '1em' ||
-                !imageLink ||
-                imageLink.style.getPropertyValue('width') !== '1em' ||
-                !imageContainer ||
-                imageContainer.style.getPropertyValue('width') !== '1em'
-            ) {
-                throw new Error(`验证失败: 国语第三版 level0 前导 gaiji 图片未压缩，可能导致置顶条目错位`);
-            }
-        }
+        validateKokugoLeadingGaiji(targetMeaning);
 
         const firstLevel0 = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
         if (firstLevel0 !== targetMeaning) {
@@ -213,6 +220,10 @@ function validateKokugoV3(underlinedElement, expectedHighlightColor) {
     let owningLevel0 = targetMeaning.previousElementSibling;
     while (owningLevel0 && owningLevel0.getAttribute('data-sc-class') !== 'level0') {
         owningLevel0 = owningLevel0.previousElementSibling;
+    }
+
+    if (owningLevel0) {
+        validateKokugoLeadingGaiji(owningLevel0);
     }
 
     const firstLevel0 = body.querySelector('div[data-sc-meaning][data-sc-class="level0"]');
@@ -239,6 +250,43 @@ function validateKokugoV3(underlinedElement, expectedHighlightColor) {
         }
     }
 
+    if (targetMeaning.getAttribute('data-sc-id') === '52067-D035') {
+        if (!owningLevel0 || owningLevel0.getAttribute('data-sc-id') !== '52067-D031') {
+            throw new Error(`验证失败: 国语第三版「引く」目标释义与所属 level0 分区脱离`);
+        }
+
+        if (body.firstElementChild !== owningLevel0) {
+            throw new Error(`验证失败: 国语第三版「引く」所属 level0 未移动到分区标题之前`);
+        }
+
+        const example = targetMeaning.nextElementSibling;
+        if (!example || example.getAttribute('data-sc-id') !== '52067-5052') {
+            throw new Error(`验证失败: 国语第三版「引く」目标释义的例句未随释义一起移动`);
+        }
+
+        const followingMeaning = example.nextElementSibling;
+        if (!followingMeaning || followingMeaning.getAttribute('data-sc-id') !== '52067-D032') {
+            throw new Error(`验证失败: 国语第三版「引く」目标释义未置顶到所属分区内第一位`);
+        }
+
+        const previousGroupNote = body.querySelector('[data-sc-id="52067-8010"]');
+        const entryTail = body.querySelector('[data-sc-id="52067-8011"]');
+        const relatedItems = body.querySelector('[data-sc-class="ruigo-items"]');
+        if (!previousGroupNote || previousGroupNote.nextElementSibling !== entryTail) {
+            throw new Error(`验证失败: 国语第三版「引く」全词条说明被错误并入置顶分区`);
+        }
+
+        if (!entryTail || entryTail.nextElementSibling !== relatedItems || body.lastElementChild !== relatedItems) {
+            throw new Error(`验证失败: 国语第三版「引く」书写说明或类语表未保留在词条末尾`);
+        }
+
+        const firstShikiri = body.querySelector('[data-sc-id="52067-8001"]');
+        const originalFirstLevel0 = body.querySelector('[data-sc-id="52067-D002"]');
+        if (!firstShikiri || firstShikiri.nextElementSibling !== originalFirstLevel0) {
+            throw new Error(`验证失败: 国语第三版「引く」原分区标题与 level0 释义错位`);
+        }
+    }
+
     if (targetMeaning.getAttribute('data-sc-id') === '41148-D009') {
         const movedExamples = [];
         let current = targetMeaning.nextElementSibling;
@@ -254,6 +302,11 @@ function validateKokugoV3(underlinedElement, expectedHighlightColor) {
 
         if (!current || current.getAttribute('data-sc-id') !== '41148-D007') {
             throw new Error(`验证失败: 国语第三版「付き」目标释义未置顶到所属大分区内第一位`);
+        }
+
+        const relatedItems = body.querySelector('[data-sc-class="ruigo-items"]');
+        if (!relatedItems || body.lastElementChild !== relatedItems) {
+            throw new Error(`验证失败: 国语第三版「付き」类语表未保留在词条末尾`);
         }
     }
 }
